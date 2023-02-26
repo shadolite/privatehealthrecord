@@ -4,15 +4,15 @@ import { ROUTE } from "./../constants/routes";
 import loadable from "@loadable/component";
 
 // Load bundles asynchronously so that the initial render happens faster
-const Dashboard = loadable(() =>
-  import(/* webpackChunkName: "AboutChunk" */ "../pages/dashboard/dashboard")
-);
+const Individual = loadable(() => import("../pages/individual/individualPage"));
+const Conditions = loadable(() => import("../pages/conditions/conditions"));
 
 class AppRoutes extends React.Component {
-  render() {    
+  render() {
     return (
       <Routes>
-        <Route path={ROUTE.DASH} element={<Dashboard />}></Route>
+        <Route path={ROUTE.INDIVIDUAL} element={<Individual />}></Route>
+        <Route path={ROUTE.CONDITIONS} element={<Conditions />}></Route>
       </Routes>
     );
   }

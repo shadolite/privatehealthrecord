@@ -1,26 +1,25 @@
 import React, { FunctionComponent } from "react";
 import { HistoryRouter } from "redux-first-history/rr6";
+import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import AppRoutes from "./routes";
-import CssBaseline from '@mui/material/CssBaseline';
-import Nav from "./nav";
+import CssBaseline from "@mui/material/CssBaseline";
+import Dashboard from "./dash";
 import "./root.css";
-import { ThunkAction, AnyAction } from "@reduxjs/toolkit";
 
 interface Props {
-  store: any,
-  history: any
-};
+  store: any;
+  history: any;
+}
 
 const Root: FunctionComponent<Props> = (props: Props): JSX.Element => {
-
   const { store, history } = props;
   return (
     <React.Fragment>
       <Provider store={store}>
         <HistoryRouter history={history}>
           <CssBaseline />
-          <Nav history={history}></Nav>
+          <Dashboard history={history}></Dashboard>
           <AppRoutes></AppRoutes>
         </HistoryRouter>
       </Provider>

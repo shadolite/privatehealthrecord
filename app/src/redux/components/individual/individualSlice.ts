@@ -1,8 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PersonalInformation } from "../../../models/personalInformation";
+import { PersonalDetails } from "../../../models/personalDetails";
 import { RootState, AppThunk } from "../../../index";
 
-const testPersonalInformation: PersonalInformation = {
+const testPersonalDetails: PersonalDetails = {
   id: 0,
   givenName: "Amy",
   familyName: "Howell",
@@ -16,18 +16,18 @@ const testPersonalInformation: PersonalInformation = {
 const individualSlice = createSlice({
   name: "individual",
   initialState: {
-    personalInformation: {} as PersonalInformation,
+    personalDetails: {} as PersonalDetails,
   },
   reducers: {
     loadDefaultIndividual(individual, action) {
-      individual.personalInformation = testPersonalInformation;
+      individual.personalDetails = testPersonalDetails;
     },
   },
 });
 
 // Selectors
 export const getPersonalInformation = (state: RootState) =>
-  state.individual.personalInformation;
+  state.individual.personalDetails;
 
 // Export actions
 export const { loadDefaultIndividual } = individualSlice.actions;

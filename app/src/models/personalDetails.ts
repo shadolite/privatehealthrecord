@@ -1,4 +1,4 @@
-export interface PersonalInformation {
+export interface PersonalDetails {
   id?: number;
   givenName: string;
   familyName?: string;

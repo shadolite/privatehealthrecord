@@ -1,9 +1,7 @@
 import React, { FunctionComponent, useEffect, useState, Suspense } from "react";
-import { AnyAction } from "@reduxjs/toolkit";
-import { ThunkAction } from "@reduxjs/toolkit";
-import { BrowserRouter } from "react-router-dom";
+import { AnyAction, ThunkAction } from "@reduxjs/toolkit";
 import { createRoot } from "react-dom/client";
-import i18n from "i18next"
+import i18n from "i18next";
 import { I18nextProvider } from "react-i18next";
 import Root from "./core/root";
 import { store, history } from "./redux/store/store";
@@ -26,4 +24,4 @@ export type AppThunk<ReturnType = void> = ThunkAction<
   RootState,
   unknown,
   AnyAction
-  >;
+>;
