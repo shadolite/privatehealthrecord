@@ -6,13 +6,11 @@ import MuiAppBar, { AppBarProps as MuiAppBarProps } from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import Badge from "@mui/material/Badge";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import MenuIcon from "@mui/icons-material/Menu";
-import NotificationsIcon from "@mui/icons-material/Notifications";
-import NavDrawer from "./components/navDrawer";
+import NavDrawer from "./navDrawer";
 
 function Copyright(props: any) {
   return (
@@ -96,11 +94,6 @@ const Dash: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
               sx={{ flexGrow: 1 }}>
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
           </Toolbar>
         </AppBar>
         <NavDrawer history={props.history} />

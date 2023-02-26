@@ -17,6 +17,9 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import MedicationIcon from "@mui/icons-material/Medication";
+import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const drawerWidth: number = 240;
 const Drawer = styled(MuiDrawer, {
@@ -75,17 +78,35 @@ const NavDrawer: React.FunctionComponent<Props> = (
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton onClick={() => navigate(ROUTE.INDIVIDUAL)}>
+          <ListItemButton>
             <ListItemIcon>
               <AccountBoxIcon />
             </ListItemIcon>
             <ListItemText primary="Individual" />
           </ListItemButton>
-          <ListItemButton onClick={() => navigate(ROUTE.CONDITIONS)}>
+          <ListItemButton>
             <ListItemIcon>
               <MonitorHeartIcon />
             </ListItemIcon>
             <ListItemText primary="Conditions" />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <MedicationIcon />
+            </ListItemIcon>
+            <ListItemText primary="Medication" />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <LocalHospitalIcon />
+            </ListItemIcon>
+            <ListItemText primary="Providers" />
+          </ListItemButton>
+          <ListItemButton>
+            <ListItemIcon>
+              <CalendarMonthIcon />
+            </ListItemIcon>
+            <ListItemText primary="Visits" />
           </ListItemButton>
           <Divider sx={{ my: 1 }} />
           <ListSubheader component="div" inset>

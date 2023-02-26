@@ -2,9 +2,9 @@ import React, { FunctionComponent } from "react";
 import { HistoryRouter } from "redux-first-history/rr6";
 import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
-import AppRoutes from "./routes";
+import AppRoutes from "./components/routes";
 import CssBaseline from "@mui/material/CssBaseline";
-import Dashboard from "./dash";
+import Dashboard from "./components/dash";
 import "./root.css";
 
 interface Props {
