@@ -103,7 +103,7 @@ async function createWindow() {
   }
 
   win.webContents.on("did-finish-load", () => {
-    win.setTitle(`Getting started with secure-electron-template (v${app.getVersion()})`);
+    win.setTitle(`Private Health Record (v${app.getVersion()})`);
   });
 
   // Only do these things when in development

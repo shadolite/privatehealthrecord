@@ -58,15 +58,7 @@
   },
   "keywords": [
     "electron",
-    "security",
-    "secure",
-    "template",
-    "javascript",
-    "react",
-    "redux",
-    "webpack",
-    "i18n",
-    "boilerplate"
+    "i18n"
   ],
   "author": "shadolite",
   "license": "GNU GENERAL PUBLIC LICENSE",
