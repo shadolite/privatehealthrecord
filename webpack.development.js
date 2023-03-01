@@ -1,12 +1,8 @@
-'use strict';
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const CspHtmlWebpackPlugin = require("csp-html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { merge } = require("webpack-merge");
 const base = require("./webpack.config");
 const path = require("path");
-// const nonce = require("./create-nonce")();
-// const { setNonce, getNonce } = require("./create-nonce.ts");
 
 module.exports = merge(base, {
   mode: "development",
@@ -29,15 +25,6 @@ module.exports = merge(base, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, "app/src/index.ejs"),
       filename: "index.html",
-      // nonce: nonce
     }),
-    // new CspHtmlWebpackPlugin({
-    //   "base-uri": ["'self'"],
-    //   "object-src": ["'none'"],
-    //   "script-src": ["'self'", `'nonce-${nonce}'`],
-    //   "style-src": ["'self'", `'nonce-${nonce}'`],
-    //   "frame-src": ["'none'"],
-    //   "worker-src": ["'none'"]
-    // })
   ]
 })
