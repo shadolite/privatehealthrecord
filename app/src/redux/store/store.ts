@@ -2,6 +2,7 @@ import { combineReducers } from "redux";
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
+import individualReducer from "../components/individual/individualSlice";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
   createReduxHistoryContext({
@@ -9,6 +10,7 @@ const { routerMiddleware, createReduxHistory, routerReducer } =
   });
 
 const reducer = combineReducers({
+  individual: individualReducer,
   router: routerReducer,
 });
 
