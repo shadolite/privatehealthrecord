@@ -1,4 +1,4 @@
-export interface Condition {
+export interface IMedication {
   id?: number;
   name: string;
   description?: string;

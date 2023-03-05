@@ -71,7 +71,7 @@ const Dash: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
             color="inherit"
             noWrap
             sx={{ flexGrow: 1 }}>
-            Dashboard
+            Private Health Record
           </Typography>
         </Toolbar>
       </AppBar>

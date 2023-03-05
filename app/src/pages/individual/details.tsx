@@ -1,4 +1,4 @@
-import { PersonalDetails, getFullName } from "../../models/personalDetails";
+import { IDetails, getFullName } from "../../models/individual/IDetails";
 import * as React from "react";
 import Paper from "@mui/material/Paper";
 import { styled } from "@mui/material/styles";
@@ -7,7 +7,7 @@ import { copyInputValue } from "../../utilities/clickHelper";
 import { isEmptyOrWhiteSpace } from "../../utilities/stringHelper";
 
 interface Props {
-  details: PersonalDetails;
+  details: IDetails;
 }
 
 const Item = styled(Paper)(({ theme }) => ({

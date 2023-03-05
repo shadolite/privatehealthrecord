@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { PersonalDetails } from "../../../models/personalDetails";
+import { IDetails } from "../../../models/individual/IDetails";
 import { RootState, AppThunk } from "../../../index";
 
 const individualSlice = createSlice({
   name: "individual",
   initialState: {
-    personalDetails: {} as PersonalDetails,
+    personalDetails: {} as IDetails,
     isLoading: false,
     isUpdating: false,
   },
