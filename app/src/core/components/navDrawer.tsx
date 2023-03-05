@@ -78,13 +78,13 @@ const NavDrawer: React.FunctionComponent<Props> = (
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(ROUTE.INDIVIDUAL)}>
             <ListItemIcon>
               <AccountBoxIcon />
             </ListItemIcon>
             <ListItemText primary="Individual" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(ROUTE.CONDITIONS)}>
             <ListItemIcon>
               <MonitorHeartIcon />
             </ListItemIcon>
