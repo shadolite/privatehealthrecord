@@ -12,8 +12,8 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const getTestPersonalDetails = () => {
     return {
       id: 0,
-      givenName: "Amy",
-      familyName: "Howell",
+      givenName: "Random",
+      familyName: "Person",
       birthdate: new Date("2001/01/01"),
       height: 1,
       address: "1234 Alley Street",

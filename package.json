@@ -1,7 +1,7 @@
 {
   "name": "private-health-record",
-  "version": "0.1",
-  "description": "",
+  "version": "0.1.0",
+  "description": "Input and store health records locally. No internet access necessary.",
   "private": true,
   "main": "app/electron/main.js",
   "scripts": {
