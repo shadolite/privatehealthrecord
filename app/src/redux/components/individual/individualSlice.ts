@@ -1,6 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { IDetails } from "../../../models/individual/IDetails";
 import { RootState, AppThunk } from "../../../index";
+import { dbRequestBegin } from "../../middleware/databaseActions";
+import { RequestType } from "../../../models/enums/requestType";
 
 const individualSlice = createSlice({
   name: "individual",
@@ -30,8 +32,18 @@ const { requested, received, failed, updated } = individualSlice.actions;
 export const getPersonalInformation = (state: RootState) =>
   state.individual.personalDetails;
 
-// export const loadIndividual: AppThunk = (dispatch) =>
-//   dispatch(getTestPersonalDetails);
+export const loadIndividualDetails =
+  (individualId: number): AppThunk =>
+  (dispatch) =>
+    dispatch(
+      dbRequestBegin({
+        type: RequestType.GetDetails,
+        data: individualId,
+        onStart: requested.type,
+        onSuccess: received.type,
+        onError: failed.type,
+      })
+    );
 
 // Export reducer
 export default individualSlice.reducer;

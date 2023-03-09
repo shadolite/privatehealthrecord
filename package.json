@@ -18,7 +18,7 @@
     "dist-linux": "npm run test && npm run prod-build && electron-builder --linux",
     "dist-windows": "npm run prod-build && electron-builder --windows",
     "dist-all": "npm run test && npm run prod-build && electron-builder --mac --linux --windows",
-    "test": "mocha"
+    "test": "jest"
   },
   "build": {
     "productName": "Private Health Record",
@@ -104,8 +104,10 @@
     "@babel/preset-env": "^7.18.9",
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
+    "@babel/types": "^7.21.2",
     "@doyensec/electronegativity": "^1.9.1",
     "@google-cloud/translate": "^7.0.0",
+    "@types/jest": "^29.4.0",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "babel-loader": "^8.2.5",
@@ -123,10 +125,9 @@
     "electron-debug": "^3.2.0",
     "html-loader": "^4.1.0",
     "html-webpack-plugin": "^5.5.0",
+    "jest": "^29.5.0",
     "mini-css-extract-plugin": "^2.6.1",
-    "mocha": "^10.0.0",
     "path-browserify": "^1.0.1",
-    "spectron": "^19.0.0",
     "stream-browserify": "^3.0.0",
     "typescript": "latest",
     "webpack": "^5.74.0",

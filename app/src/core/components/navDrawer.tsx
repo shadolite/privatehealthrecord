@@ -1,5 +1,5 @@
 import * as React from "react";
-import { ROUTE } from "../../constants/routes";
+import { AppRoute } from "../../models/enums/appRoute";
 import { useNavigate } from "react-router-dom";
 import MuiDrawer from "@mui/material/Drawer";
 import {
@@ -78,13 +78,13 @@ const NavDrawer: React.FunctionComponent<Props> = (
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton onClick={() => navigate(ROUTE.INDIVIDUAL)}>
+          <ListItemButton onClick={() => navigate(AppRoute.Individual)}>
             <ListItemIcon>
               <AccountBoxIcon />
             </ListItemIcon>
             <ListItemText primary="Individual" />
           </ListItemButton>
-          <ListItemButton onClick={() => navigate(ROUTE.CONDITIONS)}>
+          <ListItemButton onClick={() => navigate(AppRoute.Conditions)}>
             <ListItemIcon>
               <MonitorHeartIcon />
             </ListItemIcon>
