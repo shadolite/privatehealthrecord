@@ -92,7 +92,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = (
 
   return (
     <FormControl component="fieldset">
-      // Measurement type toggle
+      [// Measurement type toggle]
       <ToggleButtonGroup
         value={measurementType}
         exclusive
