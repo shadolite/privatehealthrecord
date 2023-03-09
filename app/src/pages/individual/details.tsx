@@ -1,23 +1,12 @@
 import { IDetails, getFullName } from "../../models/individual/IDetails";
 import * as React from "react";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import { Box, TextField } from "@mui/material";
 import { copyInputValue } from "../../utilities/clickHelper";
-import { isEmptyOrWhiteSpace } from "../../utilities/stringHelper";
+import Item from "../../core/components/item";
 
 interface Props {
   details: IDetails;
 }
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  margin: theme.spacing(1),
-  textAlign: "left",
-  color: theme.palette.text.secondary,
-}));
 
 const DetailsItem: React.FunctionComponent<Props> = (
   props: Props

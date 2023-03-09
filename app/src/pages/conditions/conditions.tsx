@@ -5,18 +5,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import Paper from "@mui/material/Paper";
-import { styled } from "@mui/material/styles";
 import { ICondition } from "../../models/ICondition";
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  margin: theme.spacing(1),
-  textAlign: "left",
-  color: theme.palette.text.secondary,
-}));
+import Item from "../../core/components/item";
 
 const rows = [
   {
