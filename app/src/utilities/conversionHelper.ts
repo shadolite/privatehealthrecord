@@ -22,7 +22,7 @@ export const getImperialHeight = (centimeters?: number) => {
   if (!centimeters) return undefined;
 
   let cmToFt = centimeters * centimeterToFeetRate;
-  let feet = Number(cmToFt.toFixed(0));
+  let feet = Math.floor(cmToFt);
   let inches = Number((cmToFt % 12).toFixed(0));
 
   if (feet == 0 && inches == 0) return undefined;
@@ -41,7 +41,7 @@ export const getImperialWeight = (kilograms?: number) => {
   if (!kilograms) return undefined;
 
   let kiloToPound = kilograms * kilogramToPoundRate;
-  let pounds = Number(kiloToPound.toFixed(0));
+  let pounds = Math.floor(kiloToPound);
   let ounces = Number(((kiloToPound - pounds) * 16).toFixed(0));
 
   if (pounds == 0 && ounces == 0) return undefined;
