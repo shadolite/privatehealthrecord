@@ -18,7 +18,6 @@ const EditDetails: React.FunctionComponent<Props> = (
         sx={{
           "& .MuiTextField-root": { m: 1 },
         }}
-        noValidate
         autoComplete="off">
         <Item>
           <TextField
@@ -38,18 +37,7 @@ const EditDetails: React.FunctionComponent<Props> = (
             type="date"
             value={props.details.birthdate}
           />
-          {/* <TextField
-            id="birthMonth"
-            label="Month"
-            type="month"
-            value={props.details.birthdate?.getMonth()}
-          />
-          <TextField
-            id="birthYear"
-            label="Year"
-            type="date"
-            value={props.details.birthdate?.getFullYear()}
-          /> */}
+          <div />
           <MeasurementFormControl
             centimeters={props.details.height}
             kilograms={props.details.weight}
@@ -82,7 +70,6 @@ const EditDetails: React.FunctionComponent<Props> = (
             />
           </div>
         </Item>
-        <Item></Item>
       </Box>
     </React.Fragment>
   );

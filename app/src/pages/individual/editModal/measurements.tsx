@@ -1,5 +1,11 @@
 import * as React from "react";
-import { FormControl, FormGroup, FormLabel, TextField } from "@mui/material";
+import {
+  FormControl,
+  FormGroup,
+  FormLabel,
+  InputAdornment,
+  TextField,
+} from "@mui/material";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import * as ConversionHelper from "../../../utilities/conversionHelper";
@@ -91,8 +97,10 @@ const MeasurementFormControl: React.FunctionComponent<Props> = (
   };
 
   return (
-    <FormControl component="fieldset">
-      [// Measurement type toggle]
+    <React.Fragment>
+      {
+        // Measurement type toggle
+      }
       <ToggleButtonGroup
         value={measurementType}
         exclusive
@@ -105,58 +113,92 @@ const MeasurementFormControl: React.FunctionComponent<Props> = (
           Imperial
         </ToggleButton>
       </ToggleButtonGroup>
-      {measurementType == "metric" ? (
-        // Metric fields
-        <React.Fragment>
-          <TextField
-            id="centimeters"
-            label="Height"
-            value={props.centimeters}
-            onBlur={handleCentimeters}
-          />
-          <TextField
-            id="kilograms"
-            label="Weight"
-            value={props.kilograms}
-            onBlur={handleKilograms}
-          />
-        </React.Fragment>
-      ) : (
-        // Imperial fields
-        <React.Fragment>
-          <FormLabel component="label">Height</FormLabel>
-          <FormGroup row>
+
+      <div />
+      <FormControl component="fieldset">
+        {measurementType == "metric" ? (
+          // Metric fields
+          <React.Fragment>
             <TextField
-              id="feet"
-              label="Feet"
-              value={feet}
-              onBlur={handleFeet}
+              id="centimeters"
+              label="Height"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">cm</InputAdornment>
+                ),
+              }}
+              value={props.centimeters}
+              onBlur={handleCentimeters}
             />
             <TextField
-              id="inches"
-              label="Inches"
-              value={inches}
-              onBlur={handleInches}
+              id="kilograms"
+              label="Weight"
+              InputProps={{
+                endAdornment: (
+                  <InputAdornment position="end">kg</InputAdornment>
+                ),
+              }}
+              value={props.kilograms}
+              onBlur={handleKilograms}
             />
-          </FormGroup>
-          <FormLabel component="label">Weight</FormLabel>
-          <FormGroup row>
-            <TextField
-              id="pounds"
-              label="Pounds"
-              value={pounds}
-              onBlur={handlePounds}
-            />
-            <TextField
-              id="ounces"
-              label="Ounces"
-              value={ounces}
-              onBlur={handleOunces}
-            />
-          </FormGroup>
-        </React.Fragment>
-      )}
-    </FormControl>
+          </React.Fragment>
+        ) : (
+          // Imperial fields
+          <React.Fragment>
+            <FormLabel component="legend">Height</FormLabel>
+            <FormGroup row>
+              <TextField
+                id="feet"
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">ft</InputAdornment>
+                  ),
+                }}
+                value={feet}
+                onBlur={handleFeet}
+              />
+              <TextField
+                id="inches"
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">in</InputAdornment>
+                  ),
+                }}
+                value={inches}
+                onBlur={handleInches}
+              />
+            </FormGroup>
+            <FormLabel component="label">Weight</FormLabel>
+            <FormGroup row>
+              <TextField
+                id="pounds"
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">lb</InputAdornment>
+                  ),
+                }}
+                value={pounds}
+                onBlur={handlePounds}
+              />
+              <TextField
+                id="ounces"
+                type="number"
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">oz</InputAdornment>
+                  ),
+                }}
+                value={ounces}
+                onBlur={handleOunces}
+              />
+            </FormGroup>
+          </React.Fragment>
+        )}
+      </FormControl>
+    </React.Fragment>
   );
 };
 
