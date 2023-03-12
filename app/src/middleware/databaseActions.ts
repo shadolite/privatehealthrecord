@@ -1,5 +1,5 @@
 import { createAction } from "@reduxjs/toolkit";
-import { RequestType } from "../../models/enums/requestType";
+import { RequestType } from "../models/enums/requestType";
 
 export interface IDatabaseRequest {
   type: RequestType;

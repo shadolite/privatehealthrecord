@@ -1,8 +1,8 @@
 import { CssBaseline, ThemeProvider } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { HistoryRouter } from "redux-first-history/rr6";
-import theme from "../styles/theme";
-import Dashboard from "./components/dash";
+import theme from "./styles/theme";
+import Dashboard from "./core/dash";
 
 interface Props {
   history: any;

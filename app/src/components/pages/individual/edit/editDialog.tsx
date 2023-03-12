@@ -5,11 +5,11 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IDetails } from "../../../models/individual/IDetails";
+import { IDetails } from "../../../../models/individual/IDetails";
 import { Box, Step, StepButton, Stepper, Typography } from "@mui/material";
-import * as IndividualData from "../../../redux/components/individual/individualSlice";
+import * as IndividualData from "../../../../store/reducers/individualSlice";
 import EditDetails from "./editDetails";
-import { useAppSelector, useAppDispatch } from "../../../redux/store/hooks";
+import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
 
 interface Props {
   open: boolean;

@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RequestType } from "../../../models/enums/requestType";
-import { IDetails } from "../../../models/individual/IDetails";
+import { RequestType } from "../../models/enums/requestType";
+import { IDetails } from "../../models/individual/IDetails";
 import { dbRequestBegin } from "../../middleware/databaseActions";
-import { AppThunk, RootState } from "../../store/store";
+import { AppThunk, RootState } from "../store";
 
 interface IndividualState {
   details: IDetails;

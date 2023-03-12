@@ -5,8 +5,8 @@ import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import { ICondition } from "../../models/ICondition";
-import Item from "../../core/components/item";
+import { ICondition } from "../../../models/ICondition";
+import Item from "../../shared/item";
 
 const rows = [
   {

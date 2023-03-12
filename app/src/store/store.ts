@@ -1,7 +1,7 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
-import individualReducer from "../components/individual/individualSlice";
+import individualReducer from "./reducers/individualSlice";
 import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =

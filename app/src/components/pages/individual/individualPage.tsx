@@ -2,10 +2,10 @@ import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
-import { loadDetails } from "../../redux/components/individual/individualSlice";
-import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
+import { loadDetails } from "../../../store/reducers/individualSlice";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import DetailsItem from "./details";
-import EditDialog from "./editModal/editDialog";
+import EditDialog from "./edit/editDialog";
 
 const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const individual = useAppSelector((state) => state.individual.details);

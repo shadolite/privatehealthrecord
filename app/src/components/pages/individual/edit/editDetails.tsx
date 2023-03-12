@@ -1,9 +1,9 @@
-import { IDetails } from "../../../models/individual/IDetails";
+import { IDetails } from "../../../../models/individual/IDetails";
 import * as React from "react";
 import { Box, TextField } from "@mui/material";
-import Item from "../../../core/components/item";
+import Item from "../../../shared/item";
 import MeasurementFormControl from "./editMeasurements";
-import { BloodType } from "../../../models/enums/bloodType";
+import { BloodType } from "../../../../models/enums/bloodType";
 
 interface Props {
   details: IDetails;

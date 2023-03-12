@@ -4,10 +4,8 @@ import { AppRoute } from "../../models/enums/appRoute";
 import loadable from "@loadable/component";
 
 // Load bundles asynchronously so that the initial render happens faster
-const Individual = loadable(
-  () => import("../../pages/individual/individualPage")
-);
-const Conditions = loadable(() => import("../../pages/conditions/conditions"));
+const Individual = loadable(() => import("../pages/individual/individualPage"));
+const Conditions = loadable(() => import("../pages/conditions/conditions"));
 
 class AppRoutes extends React.Component {
   render() {

@@ -1,8 +1,8 @@
-import { IDetails, getFullName } from "../../models/individual/IDetails";
+import { IDetails, getFullName } from "../../../models/individual/IDetails";
 import * as React from "react";
 import { Box, TextField } from "@mui/material";
-import { copyInputValue } from "../../utilities/clickHelper";
-import Item from "../../core/components/item";
+import { copyInputValue } from "../../../utilities/clickHelper";
+import Item from "../../shared/item";
 
 interface Props {
   details: IDetails;

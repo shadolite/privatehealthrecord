@@ -1,8 +1,8 @@
 import * as actions from "./databaseActions";
 import { Middleware } from "redux";
 import { RootState } from "../store/store";
-import { isEmptyOrWhiteSpace } from "../../utilities/stringHelper";
-import { database } from "../../database/database";
+import { isEmptyOrWhiteSpace } from "../utilities/stringHelper";
+import { database } from "../database/database";
 
 const databaseAPI: Middleware<{}, RootState> =
   ({ dispatch }) =>
