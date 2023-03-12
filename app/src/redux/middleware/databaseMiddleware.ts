@@ -21,10 +21,10 @@ const databaseAPI: Middleware<{}, RootState> =
     try {
       const response = await database.request(type, data);
       // General
-      dispatch(actions.dbRequestSuccess(response.data));
+      dispatch(actions.dbRequestSuccess(response));
       // Specific
       if (!isEmptyOrWhiteSpace(onSuccess))
-        dispatch({ type: onSuccess, payload: response.data });
+        dispatch({ type: onSuccess, payload: response });
     } catch (error: any) {
       // Handle 401 and 404 error codes
       if (error?.response?.status != undefined)
@@ -39,7 +39,7 @@ const databaseAPI: Middleware<{}, RootState> =
       dispatch(actions.dbRequestFailed(error.message));
       // Specific
       if (!isEmptyOrWhiteSpace(onError))
-        dispatch({ type: onError, payload: error.response.data });
+        dispatch({ type: onError, payload: error.message });
     }
   };
 
