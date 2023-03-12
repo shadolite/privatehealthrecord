@@ -1,28 +1,39 @@
-import { combineReducers } from "redux";
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
 import individualReducer from "../components/individual/individualSlice";
+import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
   createReduxHistoryContext({
     history: createHashHistory(),
   });
 
-const reducer = combineReducers({
+const reducer = {
   individual: individualReducer,
   router: routerReducer,
-});
+};
 
-export const store = configureStore({
+export const store: any = configureStore({
   reducer,
-  middleware: [
+  middleware: (getDefaultMiddleware) => [
     ...getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+      serializableCheck: {
+        // Ignore these action types
+        ignoredActions: ["db/requestBegin"],
+      },
+    }).concat(databaseAPI),
     routerMiddleware,
   ],
 });
 
 export const history = createReduxHistory(store);
-export type RootState = ReturnType<typeof reducer>;
+
+export type AppDispatch = typeof store.dispatch;
+export type RootState = ReturnType<typeof store.getState>;
+export type AppThunk<ReturnType = void> = ThunkAction<
+  ReturnType,
+  RootState,
+  unknown,
+  Action<string>
+>;

@@ -1,38 +1,52 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { IDetails } from "../../../models/individual/IDetails";
-import { RootState, AppThunk } from "../../../index";
-import { dbRequestBegin } from "../../middleware/databaseActions";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestType } from "../../../models/enums/requestType";
+import { IDetails } from "../../../models/individual/IDetails";
+import { dbRequestBegin } from "../../middleware/databaseActions";
+import { AppThunk, RootState } from "../../store/store";
+
+interface IndividualState {
+  details: IDetails;
+  isLoading: boolean;
+  isUpdating: boolean;
+}
+
+const initialState: IndividualState = {
+  details: {} as IDetails,
+  isLoading: false,
+  isUpdating: false,
+};
 
 const individualSlice = createSlice({
   name: "individual",
-  initialState: {
-    personalDetails: {} as IDetails,
-    isLoading: false,
-    isUpdating: false,
-  },
+  initialState,
   reducers: {
-    requested: (individual, action) => {
+    requested: (individual) => {
       individual.isLoading = true;
     },
-    received: (individual, action) => {
-      individual.personalDetails = action.payload;
+    received: (individual, action: PayloadAction<IDetails>) => {
+      individual.details = action.payload;
     },
-    failed: (individual, action) => {
+    failed: (individual) => {
       individual.isLoading = false;
     },
-    updated: (individual, action) => {},
+    added: (individual, action: PayloadAction<number>) => {
+      individual.isLoading = false;
+      individual.details.id = action.payload;
+    },
+    updated: (individual) => {
+      individual.isLoading = false;
+    },
   },
 });
 
 // Actions
-const { requested, received, failed, updated } = individualSlice.actions;
+const { requested, received, failed, added, updated } = individualSlice.actions;
 
 // Selectors
-export const getPersonalInformation = (state: RootState) =>
-  state.individual.personalDetails;
+export const getDetails = (state: RootState) => state.individual.details;
 
-export const loadIndividualDetails =
+// Thunks
+export const loadDetails =
   (individualId: number): AppThunk =>
   (dispatch) =>
     dispatch(
@@ -41,6 +55,32 @@ export const loadIndividualDetails =
         data: individualId,
         onStart: requested.type,
         onSuccess: received.type,
+        onError: failed.type,
+      })
+    );
+
+export const addDetails =
+  (details: IDetails): AppThunk =>
+  (dispatch) =>
+    dispatch(
+      dbRequestBegin({
+        type: RequestType.AddDetails,
+        data: details,
+        onStart: requested.type,
+        onSuccess: added.type,
+        onError: failed.type,
+      })
+    );
+
+export const saveDetails =
+  (details: IDetails): AppThunk =>
+  (dispatch) =>
+    dispatch(
+      dbRequestBegin({
+        type: RequestType.UpdateDetails,
+        data: details,
+        onStart: requested.type,
+        onSuccess: updated.type,
         onError: failed.type,
       })
     );

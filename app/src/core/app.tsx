@@ -1,30 +1,21 @@
+import { CssBaseline, ThemeProvider } from "@mui/material";
 import React, { FunctionComponent } from "react";
 import { HistoryRouter } from "redux-first-history/rr6";
-import { Provider } from "react-redux";
-import { CssBaseline, ThemeProvider } from "@mui/material";
-import Dashboard from "./components/dash";
 import theme from "../styles/theme";
+import Dashboard from "./components/dash";
 
 interface Props {
-  store: any;
   history: any;
 }
 
-const App: FunctionComponent<Props> = (props: Props): JSX.Element => {
-  const { store, history } = props;
+const App: FunctionComponent<Props> = ({ history }): JSX.Element => {
   return (
-    // <CacheProvider value={cache}>
-    <React.Fragment>
-      <Provider store={store}>
-        <HistoryRouter history={history}>
-          <ThemeProvider theme={theme}>
-            <CssBaseline />
-            <Dashboard history={history}></Dashboard>
-          </ThemeProvider>
-        </HistoryRouter>
-      </Provider>
-    </React.Fragment>
-    // </CacheProvider>
+    <ThemeProvider theme={theme}>
+      <HistoryRouter history={history}>
+        <CssBaseline />
+        <Dashboard history={history}></Dashboard>
+      </HistoryRouter>
+    </ThemeProvider>
   );
 };
 
