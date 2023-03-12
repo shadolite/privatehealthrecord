@@ -1,40 +1,31 @@
-import * as React from "react";
+import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
-import { useDispatch, useSelector } from "react-redux";
-import * as IndividualData from "../../redux/components/individual/individualSlice";
+import * as React from "react";
+import { loadDetails } from "../../redux/components/individual/individualSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/store/hooks";
 import DetailsItem from "./details";
-import { IDetails } from "../../models/individual/IDetails";
-import { Button } from "@mui/material";
 import EditDialog from "./editModal/editDialog";
 
 const IndividualPage: React.FunctionComponent = (): JSX.Element => {
+  const individual = useAppSelector((state) => state.individual.details);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [selectedIndividual, setSelectedIndividual] =
+    React.useState(individual);
 
   const handleClickOpen = () => {
     setDialogOpen(true);
   };
 
-  const getTestPersonalDetails = () => {
-    return {
-      id: 0,
-      givenName: "Random",
-      familyName: "Person",
-      birthdate: new Date("2001/01/01"),
-      height: 1,
-      address: "1234 Alley Street",
-      phoneNumber: "555-555-5555",
-      notes:
-        "Vero repudiandae quis laboriosam omnis dolore. Quia reprehenderit soluta nulla facere recusandae qui magnam. Reprehenderit molestias rerum praesentium totam accusamus earum corporis maxime. Qui natus et sed omnis maxime omnis suscipit. Dolore velit error illo delectus. Recusandae saepe eum provident doloribus cum blanditiis. Harum ab illum dolorem. Rerum voluptatem dolores ratione. Et ut quia minus. Velit consectetur praesentium maxime magni eaque possimus asperiores tempore. Rerum quod iure esse ipsa qui sit sed. Fugiat rerum voluptates officiis. Quo dignissimos suscipit praesentium. Aliquam minima eum autem voluptatem. Nostrum et aut pariatur consequatur aperiam rerum et. Enim explicabo est iusto aperiam. Qui cumque dicta in. Quia et distinctio ratione provident voluptas hic distinctio. Ea suscipit quibusdam ut dolorum quasi adipisci.",
-    } as IDetails;
-  };
+  const dispatch = useAppDispatch();
 
-  const details = useSelector(getTestPersonalDetails);
-  const dispatch = useDispatch();
+  React.useEffect(() => {
+    dispatch(loadDetails(1));
+  }, []);
 
-  // React.useEffect(() => {
-  //   dispatch(IndividualData.loadIndividual);
-  // }, []);
+  React.useEffect(() => {
+    setSelectedIndividual(individual);
+  }, [individual]);
 
   return (
     <React.Fragment>
@@ -45,10 +36,10 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
         <EditDialog
           open={dialogOpen}
           setOpen={setDialogOpen}
-          details={details}
+          individual={selectedIndividual}
         />
         <Stack spacing={2}>
-          <DetailsItem details={details}></DetailsItem>
+          <DetailsItem details={selectedIndividual}></DetailsItem>
         </Stack>
       </Box>
     </React.Fragment>

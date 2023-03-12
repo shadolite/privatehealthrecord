@@ -7,21 +7,33 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import { IDetails } from "../../../models/individual/IDetails";
 import { Box, Step, StepButton, Stepper, Typography } from "@mui/material";
+import * as IndividualData from "../../../redux/components/individual/individualSlice";
 import EditDetails from "./editDetails";
+import { useAppSelector, useAppDispatch } from "../../../redux/store/hooks";
 
 interface Props {
   open: boolean;
   setOpen: any;
-  details: IDetails;
+  individual: IDetails;
 }
 
 const steps = ["Details"]; //, "Diagnoses", "Treatments"];
 
-const EditDialog: React.FunctionComponent<Props> = (
-  props: Props
-): JSX.Element => {
+const EditDialog: React.FunctionComponent<Props> = ({
+  open,
+  setOpen,
+  individual,
+}): JSX.Element => {
+  const [details, setDetails] = React.useState(individual);
+  const dispatch = useAppDispatch();
+  const saveDetails = (details: IDetails) => {
+    details.id
+      ? dispatch(IndividualData.saveDetails(details))
+      : dispatch(IndividualData.addDetails(details));
+  };
+
   const handleClose = () => {
-    props.setOpen(false);
+    setOpen(false);
   };
 
   const [activeStep, setActiveStep] = React.useState(0);
@@ -53,6 +65,7 @@ const EditDialog: React.FunctionComponent<Props> = (
           steps.findIndex((step, i) => !(i in completed))
         : activeStep + 1;
     setActiveStep(newActiveStep);
+    setActiveStep(0);
   };
 
   const handleBack = () => {
@@ -67,7 +80,10 @@ const EditDialog: React.FunctionComponent<Props> = (
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
-    handleNext();
+    if (allStepsCompleted()) {
+      saveDetails(details);
+    }
+    // handleNext();
   };
 
   const handleReset = () => {
@@ -78,7 +94,13 @@ const EditDialog: React.FunctionComponent<Props> = (
   const loadStep = (step: number): any => {
     switch (step) {
       case 0:
-        return <EditDetails details={props.details}></EditDetails>;
+        return (
+          <EditDetails
+            details={details}
+            isComplete={completed[0]}
+            setDetails={setDetails}
+          />
+        );
       default:
         break;
     }
@@ -86,7 +108,7 @@ const EditDialog: React.FunctionComponent<Props> = (
 
   return (
     <div>
-      <Dialog open={props.open} onClose={handleClose}>
+      <Dialog fullWidth={true} maxWidth="lg" open={open} onClose={handleClose}>
         <DialogTitle>Edit Individual</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
@@ -101,55 +123,37 @@ const EditDialog: React.FunctionComponent<Props> = (
               ))}
             </Stepper>
             <div>
-              {allStepsCompleted() ? (
-                <React.Fragment>
-                  <Typography sx={{ mt: 2, mb: 1 }}>
-                    All steps completed - you&apos;re finished
-                  </Typography>
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleReset}>Reset</Button>
-                  </Box>
-                </React.Fragment>
-              ) : (
-                <React.Fragment>
-                  {loadStep(activeStep)}
-                  <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
-                    <Button
+              <React.Fragment>
+                {loadStep(activeStep)}
+                <Box sx={{ display: "flex", flexDirection: "row", pt: 2 }}>
+                  {/* <Button
                       color="inherit"
                       disabled={activeStep === 0}
                       onClick={handleBack}
                       sx={{ mr: 1 }}>
                       Back
-                    </Button>
-                    <Box sx={{ flex: "1 1 auto" }} />
-                    <Button onClick={handleNext} sx={{ mr: 1 }}>
+                    </Button> */}
+                  <Box sx={{ flex: "1 1 auto" }} />
+                  {/* <Button onClick={handleNext} sx={{ mr: 1 }}>
                       Next
-                    </Button>
-                    {activeStep !== steps.length &&
-                      (completed[activeStep] ? (
-                        <Typography
-                          variant="caption"
-                          sx={{ display: "inline-block" }}>
-                          Step {activeStep + 1} already completed
-                        </Typography>
-                      ) : (
-                        <Button onClick={handleComplete}>
-                          {completedSteps() === totalSteps() - 1
-                            ? "Finish"
-                            : "Save Step"}
-                        </Button>
-                      ))}
-                  </Box>
-                </React.Fragment>
-              )}
+                    </Button> */}
+                  {activeStep !== steps.length && completed[activeStep] && (
+                    <Typography
+                      variant="caption"
+                      sx={{ display: "inline-block" }}>
+                      Step {activeStep + 1} has been saved
+                    </Typography>
+                  )}
+                  <Button onClick={handleComplete}>
+                    {completedSteps() === totalSteps() - 1 ? "Finish" : "Save"}
+                  </Button>
+                  <Button onClick={handleReset}>Edit</Button>
+                </Box>
+              </React.Fragment>
+              {/* )} */}
             </div>
           </Box>
         </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
-        </DialogActions>
       </Dialog>
     </div>
   );
