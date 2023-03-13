@@ -92,12 +92,12 @@ export const saveDetails =
     );
 
 export const deleteDetails =
-  (details: IDetails): AppThunk =>
+  (individualId: number): AppThunk =>
   (dispatch) =>
     dispatch(
       dbRequestBegin({
         type: RequestType.DeleteDetails,
-        data: details,
+        data: individualId,
         onStart: requested.type,
         onSuccess: deleted.type,
         onError: failed.type,
