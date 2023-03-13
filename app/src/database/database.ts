@@ -27,6 +27,7 @@ const requestFunction: EnumDictionary<RequestType, Function> = {
   [RequestType.GetDetails]: Details.get,
   [RequestType.AddDetails]: Details.add,
   [RequestType.UpdateDetails]: Details.update,
+  [RequestType.DeleteDetails]: Details.deleteDetails,
 };
 
 type EnumDictionary<T extends string | symbol | number, U> = {
