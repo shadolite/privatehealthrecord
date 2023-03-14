@@ -2,7 +2,10 @@ import { Button } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
-import { loadDetails } from "../../../store/reducers/individualSlice";
+import {
+  loadDetails,
+  deleteDetails,
+} from "../../../store/reducers/individualSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import DetailsItem from "./details";
 import EditDialog from "./edit/editDialog";
@@ -10,6 +13,7 @@ import EditDialog from "./edit/editDialog";
 const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const individual = useAppSelector((state) => state.individual.details);
   const [dialogOpen, setDialogOpen] = React.useState(false);
+  const [selectedIndividualId, setSelectedIndividualId] = React.useState(1);
   const [selectedIndividual, setSelectedIndividual] =
     React.useState(individual);
 
@@ -20,7 +24,8 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    dispatch(loadDetails(1));
+    // dispatch(deleteDetails(selectedIndividualId));
+    dispatch(loadDetails(selectedIndividualId));
   }, []);
 
   React.useEffect(() => {

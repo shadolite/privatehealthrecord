@@ -17,7 +17,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
   setDetails,
 }): JSX.Element => {
   const [givenName, setGivenName] = React.useState(details.givenName);
-  const [familyName, setFamilyName] = React.useState(details.givenName);
+  const [familyName, setFamilyName] = React.useState(details.familyName);
   const [birthdate, setBirthdate] = React.useState(details.birthdate);
   const [height, setHeight] = React.useState(details.height);
   const [weight, setWeight] = React.useState(details.weight);
@@ -79,13 +79,13 @@ const EditDetails: React.FunctionComponent<Props> = ({
             label="Given Name"
             required
             value={givenName}
-            onBlur={handleGivenName}
+            onChange={handleGivenName}
           />
           <TextField
             id="familyName"
             label="Family Name"
             value={familyName}
-            onBlur={handleFamilyName}
+            onChange={handleFamilyName}
           />
           <div />
           <TextField
@@ -93,7 +93,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
             label="Birthdate"
             type="date"
             value={birthdate}
-            onBlur={handleBirthdate}
+            onChange={handleBirthdate}
           />
           <div />
           <MeasurementFormControl
@@ -107,19 +107,19 @@ const EditDetails: React.FunctionComponent<Props> = ({
             id="bloodType"
             label="Blood Type"
             value={bloodType}
-            onBlur={handleBloodType}
+            onChange={handleBloodType}
           />
           <TextField
             id="address"
             label="Address"
             value={address}
-            onBlur={handleAddress}
+            onChange={handleAddress}
           />
           <TextField
             id="phoneNumber"
             label="Phone Number"
             value={phoneNumber}
-            onBlur={handlePhoneNumber}
+            onChange={handlePhoneNumber}
           />
           <div>
             <TextField
@@ -131,7 +131,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
                 paddingRight: 2,
               }}
               value={notes}
-              onBlur={handleNotes}
+              onChange={handleNotes}
             />
           </div>
         </Item>

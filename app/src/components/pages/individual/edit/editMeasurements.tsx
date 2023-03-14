@@ -132,7 +132,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                 ),
               }}
               value={centimeters}
-              onBlur={handleCentimeters}
+              onChange={handleCentimeters}
             />
             <TextField
               id="kilograms"
@@ -143,7 +143,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                 ),
               }}
               value={kilograms}
-              onBlur={handleKilograms}
+              onChange={handleKilograms}
             />
           </FormGroup>
         ) : (
@@ -159,7 +159,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                   ),
                 }}
                 value={feet}
-                onBlur={handleFeet}
+                onChange={handleFeet}
               />
               <TextField
                 id="inches"
@@ -169,7 +169,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                   ),
                 }}
                 value={inches}
-                onBlur={handleInches}
+                onChange={handleInches}
               />
             </FormGroup>
             <FormLabel component="label">Weight</FormLabel>
@@ -182,7 +182,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                   ),
                 }}
                 value={pounds}
-                onBlur={handlePounds}
+                onChange={handlePounds}
               />
               <TextField
                 id="ounces"
@@ -192,7 +192,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                   ),
                 }}
                 value={ounces}
-                onBlur={handleOunces}
+                onChange={handleOunces}
               />
             </FormGroup>
           </React.Fragment>
