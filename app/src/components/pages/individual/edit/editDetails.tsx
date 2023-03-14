@@ -19,8 +19,12 @@ const EditDetails: React.FunctionComponent<Props> = ({
   const [givenName, setGivenName] = React.useState(details.givenName);
   const [familyName, setFamilyName] = React.useState(details.familyName);
   const [birthdate, setBirthdate] = React.useState(details.birthdate);
-  const [height, setHeight] = React.useState(details.height);
-  const [weight, setWeight] = React.useState(details.weight);
+  const [height, setHeight] = React.useState(
+    details.height ? details.height : 0
+  );
+  const [weight, setWeight] = React.useState(
+    details.weight ? details.weight : 0
+  );
   const [bloodType, setBloodType] = React.useState(details.bloodType);
   const [address, setAddress] = React.useState(details.address);
   const [phoneNumber, setPhoneNumber] = React.useState(details.phoneNumber);

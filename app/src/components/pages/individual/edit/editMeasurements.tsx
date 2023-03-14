@@ -11,10 +11,10 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import * as ConversionHelper from "../../../../utilities/conversionHelper";
 
 interface Props {
-  centimeters?: number;
-  setCentimeters: (value: any) => void;
-  kilograms?: number;
-  setKilograms: (value: any) => void;
+  centimeters: number;
+  setCentimeters: (value: number) => void;
+  kilograms: number;
+  setKilograms: (value: number) => void;
 }
 
 const MeasurementFormControl: React.FunctionComponent<Props> = ({
@@ -23,82 +23,61 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
   kilograms,
   setKilograms,
 }): JSX.Element => {
-  const [measurementType, setMeasurementType] = React.useState<string | null>(
-    "metric"
-  );
+  const [measurementType, setMeasurementType] = React.useState("metric");
 
   // Imperial measurement values
   // Height
-  const [feet, setFeet] = React.useState<number | undefined>(
-    ConversionHelper.getImperialHeight(centimeters)?.feet
+  const [feet, setFeet] = React.useState(
+    ConversionHelper.getImperialHeight(centimeters).feet
   );
-  const [inches, setInches] = React.useState<number | undefined>(
-    ConversionHelper.getImperialHeight(centimeters)?.inches
+  const [inches, setInches] = React.useState(
+    ConversionHelper.getImperialHeight(centimeters).inches
   );
   // Weight
-  const [pounds, setPounds] = React.useState<number | undefined>(
-    ConversionHelper.getImperialWeight(kilograms)?.pounds
-  );
-  const [ounces, setOunces] = React.useState<number | undefined>(
-    ConversionHelper.getImperialWeight(kilograms)?.ounces
+  const [pounds, setPounds] = React.useState(
+    ConversionHelper.getImperialWeight(kilograms)
   );
 
   // Measurement type selection handler
-  const handleMeasurementType = (
-    event: React.MouseEvent<HTMLElement>,
-    newMeasurement: string | null
-  ) => {
+  const handleMeasurementType = (event: any, newMeasurement: string) => {
     setMeasurementType(newMeasurement);
   };
 
   // Imperial measurement handlers
   // Height
-  const handleFeet = (
-    event: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>
-  ) => {
-    setFeet(Number(event.target.value));
-    setCentimeters(ConversionHelper.getMetricHeight(feet, inches));
+  const handleImperialHeight = (event: any) => {
+    let height = ConversionHelper.getImperialHeight(centimeters);
+    setFeet(Number(height?.feet));
+    setInches(Number(height?.inches));
   };
-  const handleInches = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setInches(Number(event.target.value));
-    setCentimeters(ConversionHelper.getMetricHeight(feet, inches));
+  const handleFeet = (event: any) => {
+    setFeet(event.target.value);
+  };
+  const handleInches = (event: any) => {
+    setInches(event.target.value);
   };
   // Weight
-  const handlePounds = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setPounds(Number(event.target.value));
-    setKilograms(ConversionHelper.getMetricWeight(pounds, ounces));
+  const handleImperialWeight = (event: any) => {
+    setPounds(ConversionHelper.getImperialWeight(event.target.value));
   };
-  const handleOunces = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setOunces(Number(event.target.value));
-    setKilograms(ConversionHelper.getMetricWeight(pounds, ounces));
+  const handlePounds = (event: any) => {
+    setPounds(event.target.value);
   };
 
   // Metric measurement handlers
   // Height
-  const handleCentimeters = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    let imperialHeight = ConversionHelper.getImperialHeight(
-      Number(event.target.value)
-    );
-    setFeet(imperialHeight?.feet);
-    setInches(imperialHeight?.inches);
+  const handleMetricHeight = (event: any) => {
+    setCentimeters(ConversionHelper.getMetricHeight(feet, inches));
+  };
+  const handleCentimeters = (event: any) => {
+    setCentimeters(event.target.value);
   };
   // Weight
-  const handleKilograms = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    let imperialWeight = ConversionHelper.getImperialWeight(
-      Number(event.target.value)
-    );
-    setPounds(imperialWeight?.pounds);
-    setOunces(imperialWeight?.ounces);
+  const handleMetricWeight = (event: any) => {
+    setKilograms(ConversionHelper.getMetricWeight(pounds));
+  };
+  const handleKilograms = (event: any) => {
+    setKilograms(event.target.value);
   };
 
   return (
@@ -133,6 +112,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
               }}
               value={centimeters}
               onChange={handleCentimeters}
+              onBlur={handleImperialHeight}
             />
             <TextField
               id="kilograms"
@@ -144,6 +124,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
               }}
               value={kilograms}
               onChange={handleKilograms}
+              onBlur={handleImperialWeight}
             />
           </FormGroup>
         ) : (
@@ -160,6 +141,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                 }}
                 value={feet}
                 onChange={handleFeet}
+                onBlur={handleMetricHeight}
               />
               <TextField
                 id="inches"
@@ -170,12 +152,13 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                 }}
                 value={inches}
                 onChange={handleInches}
+                onBlur={handleMetricHeight}
               />
             </FormGroup>
-            <FormLabel component="label">Weight</FormLabel>
             <FormGroup row>
               <TextField
                 id="pounds"
+                label="Weight"
                 InputProps={{
                   endAdornment: (
                     <InputAdornment position="end">lb</InputAdornment>
@@ -183,16 +166,7 @@ const MeasurementFormControl: React.FunctionComponent<Props> = ({
                 }}
                 value={pounds}
                 onChange={handlePounds}
-              />
-              <TextField
-                id="ounces"
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">oz</InputAdornment>
-                  ),
-                }}
-                value={ounces}
-                onChange={handleOunces}
+                onBlur={handleMetricWeight}
               />
             </FormGroup>
           </React.Fragment>
