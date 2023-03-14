@@ -16,19 +16,31 @@ const EditDetails: React.FunctionComponent<Props> = ({
   isComplete,
   setDetails,
 }): JSX.Element => {
-  const [givenName, setGivenName] = React.useState(details.givenName);
-  const [familyName, setFamilyName] = React.useState(details.familyName);
-  const [birthdate, setBirthdate] = React.useState(details.birthdate);
+  const [givenName, setGivenName] = React.useState(
+    details.givenName ? details.givenName : ""
+  );
+  const [familyName, setFamilyName] = React.useState(
+    details.familyName ? details.familyName : ""
+  );
+  const [birthdate, setBirthdate] = React.useState(
+    details.birthdate ? details.birthdate : new Date()
+  );
   const [height, setHeight] = React.useState(
-    details.height ? details.height : 0
+    details.height ? details.height : ""
   );
   const [weight, setWeight] = React.useState(
-    details.weight ? details.weight : 0
+    details.weight ? details.weight : ""
   );
-  const [bloodType, setBloodType] = React.useState(details.bloodType);
-  const [address, setAddress] = React.useState(details.address);
-  const [phoneNumber, setPhoneNumber] = React.useState(details.phoneNumber);
-  const [notes, setNotes] = React.useState(details.notes);
+  const [bloodType, setBloodType] = React.useState(
+    details.bloodType ? details.bloodType : ""
+  );
+  const [address, setAddress] = React.useState(
+    details.address ? details.address : ""
+  );
+  const [phoneNumber, setPhoneNumber] = React.useState(
+    details.phoneNumber ? details.phoneNumber : ""
+  );
+  const [notes, setNotes] = React.useState(details.notes ? details.notes : "");
 
   const handleGivenName = (event: any) => {
     setGivenName(event.target.value);
