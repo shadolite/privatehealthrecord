@@ -25,7 +25,7 @@ const individualSlice = createSlice({
     },
     received: (individual, action: PayloadAction<IDetails>) => {
       individual.isLoading = false;
-      individual.details = action.payload;
+      if (action.payload) individual.details = action.payload;
     },
     failed: (individual) => {
       individual.isLoading = false;
