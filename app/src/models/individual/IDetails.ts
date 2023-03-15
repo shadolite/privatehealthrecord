@@ -1,5 +1,5 @@
 import { IProvider } from "../IProvider";
-import { IDiagnosis } from "./IDiagnosis";
+import { IDiagnosis } from "./Diagnoses/IDiagnosis";
 
 export interface IDetails {
   id?: number;
@@ -11,8 +11,6 @@ export interface IDetails {
   bloodType?: string;
   address?: string;
   phoneNumber?: string;
-  diagnoses?: Array<IDiagnosis>;
-  providers?: Array<IProvider>;
   notes?: string;
 }
 

@@ -3,17 +3,27 @@ import { RequestType } from "../../models/enums/requestType";
 import { IDetails } from "../../models/individual/IDetails";
 import { dbRequestBegin } from "../../middleware/databaseActions";
 import { AppThunk, RootState } from "../store";
+import { IDiagnosis } from "../../models/individual/Diagnoses/IDiagnosis";
+import { IInsurance } from "../../models/individual/IInsurance";
+import { IIndividualProvider } from "../../models/individual/IIndividualProvider";
+import { IVisit } from "../../models/individual/IVisit";
 
 interface IndividualState {
   details: IDetails;
+  diagnoses: Array<IDiagnosis>;
+  insurance: Array<IInsurance>;
+  providers: Array<IIndividualProvider>;
+  visits: Array<IVisit>;
   isLoading: boolean;
-  // isUpdating: boolean;
 }
 
 const initialState: IndividualState = {
   details: {} as IDetails,
+  diagnoses: {} as Array<IDiagnosis>,
+  insurance: {} as Array<IInsurance>,
+  providers: {} as Array<IIndividualProvider>,
+  visits: {} as Array<IVisit>,
   isLoading: false,
-  // isUpdating: false,
 };
 
 const individualSlice = createSlice({

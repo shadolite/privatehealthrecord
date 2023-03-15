@@ -2,11 +2,12 @@ import { IProvider } from "../IProvider";
 
 export interface IInsurance {
   id?: number;
+  individualId: number;
   memberId?: string;
   groupId?: string;
   binId?: string;
-  deductible: number;
+  deductible?: number;
   deductibleMet?: boolean;
-  provider?: IProvider;
+  provider: IProvider;
   notes?: string;
 }
