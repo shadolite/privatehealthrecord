@@ -7,13 +7,11 @@ import { BloodType } from "../../../../models/enums/bloodType";
 
 interface Props {
   details: IDetails;
-  isComplete: boolean;
   setDetails: (details: IDetails) => void;
 }
 
 const EditDetails: React.FunctionComponent<Props> = ({
   details,
-  isComplete,
   setDetails,
 }): JSX.Element => {
   const [givenName, setGivenName] = React.useState(
@@ -23,7 +21,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
     details.familyName ? details.familyName : ""
   );
   const [birthdate, setBirthdate] = React.useState(
-    details.birthdate ? details.birthdate : new Date()
+    details.birthdate ? details.birthdate.toLocaleDateString() : ""
   );
   const [height, setHeight] = React.useState(
     details.height ? details.height : ""
@@ -65,21 +63,30 @@ const EditDetails: React.FunctionComponent<Props> = ({
   };
 
   React.useEffect(() => {
-    if (isComplete) {
-      let newDetails = {
-        givenName,
-        familyName,
-        birthdate,
-        height,
-        weight,
-        bloodType,
-        address,
-        phoneNumber,
-        notes,
-      } as IDetails;
-      setDetails(newDetails);
-    }
-  }, [isComplete]);
+    let newDetails = {
+      givenName: givenName,
+      familyName: familyName == "" ? undefined : familyName,
+      birthdate: birthdate == "" ? undefined : new Date(birthdate),
+      height: height == "" ? undefined : Number(height),
+      weight: weight == "" ? undefined : Number(weight),
+      bloodType: bloodType == "" ? undefined : bloodType,
+      address: address == "" ? undefined : address,
+      phoneNumber: phoneNumber == "" ? undefined : phoneNumber,
+      notes: notes == "" ? undefined : notes,
+    } as IDetails;
+
+    setDetails(newDetails);
+  }, [
+    givenName,
+    familyName,
+    birthdate,
+    height,
+    weight,
+    bloodType,
+    address,
+    phoneNumber,
+    notes,
+  ]);
 
   return (
     <React.Fragment>
@@ -107,7 +114,6 @@ const EditDetails: React.FunctionComponent<Props> = ({
           <TextField
             id="birthdate"
             label="Birthdate"
-            type="date"
             value={birthdate}
             onChange={handleBirthdate}
           />

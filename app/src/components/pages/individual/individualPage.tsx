@@ -11,7 +11,7 @@ import DetailsItem from "./details";
 import EditDialog from "./edit/editDialog";
 
 const IndividualPage: React.FunctionComponent = (): JSX.Element => {
-  const individual = useAppSelector((state) => state.individual.details);
+  const individual = useAppSelector((state) => state.individual);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedIndividualId, setSelectedIndividualId] = React.useState(1);
   const [selectedIndividual, setSelectedIndividual] =
@@ -29,8 +29,8 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    setSelectedIndividual(individual);
-  }, [individual]);
+    dispatch(loadDetails(selectedIndividualId));
+  }, [selectedIndividual]);
 
   return (
     <React.Fragment>
@@ -42,9 +42,10 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
           open={dialogOpen}
           setOpen={setDialogOpen}
           individual={selectedIndividual}
+          setIndividual={setSelectedIndividual}
         />
         <Stack spacing={2}>
-          <DetailsItem details={selectedIndividual}></DetailsItem>
+          <DetailsItem details={individual.details}></DetailsItem>
         </Stack>
       </Box>
     </React.Fragment>

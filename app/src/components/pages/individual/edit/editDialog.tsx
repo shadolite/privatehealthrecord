@@ -15,6 +15,7 @@ interface Props {
   open: boolean;
   setOpen: any;
   individual: IDetails;
+  setIndividual: any;
 }
 
 const steps = ["Details"]; //, "Diagnoses", "Treatments"];
@@ -23,6 +24,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
   open,
   setOpen,
   individual,
+  setIndividual,
 }): JSX.Element => {
   const [details, setDetails] = React.useState(individual);
   const dispatch = useAppDispatch();
@@ -80,6 +82,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
     const newCompleted = completed;
     newCompleted[activeStep] = true;
     setCompleted(newCompleted);
+
     if (allStepsCompleted()) {
       saveDetails(details);
     }
@@ -94,13 +97,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
   const loadStep = (step: number): any => {
     switch (step) {
       case 0:
-        return (
-          <EditDetails
-            details={details}
-            isComplete={completed[0]}
-            setDetails={setDetails}
-          />
-        );
+        return <EditDetails details={details} setDetails={setDetails} />;
       default:
         break;
     }
@@ -147,7 +144,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
                   <Button onClick={handleComplete}>
                     {completedSteps() === totalSteps() - 1 ? "Finish" : "Save"}
                   </Button>
-                  <Button onClick={handleReset}>Edit</Button>
+                  {/* <Button onClick={handleReset}>Edit</Button> */}
                 </Box>
               </React.Fragment>
               {/* )} */}
