@@ -1,5 +1,3 @@
-import { IProvider } from "../IProvider";
-
 export interface IInsurance {
   id?: number;
   individualId: number;
@@ -8,6 +6,7 @@ export interface IInsurance {
   binId?: string;
   deductible?: number;
   deductibleMet?: boolean;
-  provider: IProvider;
+  providerId: number;
   notes?: string;
+  isActive: boolean;
 }

@@ -8,14 +8,17 @@ import {
 } from "../../../store/reducers/individualSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import DetailsItem from "./details";
+import IndividualConditionsItem from "./individualConditions/individualConditions";
+import VisitsItem from "./visits";
+import ProvidersItem from "./individualProviders";
+import InsuranceItem from "./insurance";
 import EditDialog from "./edit/editDialog";
 
 const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const individual = useAppSelector((state) => state.individual);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedIndividualId, setSelectedIndividualId] = React.useState(1);
-  const [selectedIndividual, setSelectedIndividual] =
-    React.useState(individual);
+  const [hasChanged, setHasChanged] = React.useState(false);
 
   const handleClickOpen = () => {
     setDialogOpen(true);
@@ -29,8 +32,9 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    dispatch(loadDetails(selectedIndividualId));
-  }, [selectedIndividual]);
+    if (hasChanged) dispatch(loadDetails(selectedIndividualId));
+    setHasChanged(false);
+  }, [hasChanged]);
 
   return (
     <React.Fragment>
@@ -41,11 +45,15 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
         <EditDialog
           open={dialogOpen}
           setOpen={setDialogOpen}
-          individual={selectedIndividual}
-          setIndividual={setSelectedIndividual}
+          individual={individual}
+          setHasChanged={setHasChanged}
         />
         <Stack spacing={2}>
-          <DetailsItem details={individual.details}></DetailsItem>
+          <DetailsItem details={individual.details} />
+          <IndividualConditionsItem />
+          <VisitsItem />
+          <ProvidersItem />
+          <InsuranceItem />
         </Stack>
       </Box>
     </React.Fragment>

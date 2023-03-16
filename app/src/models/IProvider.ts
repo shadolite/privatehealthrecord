@@ -7,6 +7,16 @@ export interface IProvider {
   type?: string;
   website?: string;
   address?: string;
-  phoneNumber?: number;
+  phoneNumber?: string;
   notes?: string;
 }
+
+export const getProviderName = (provider: IProvider): string => {
+  return `${provider.givenName ? provider.givenName : ""}${
+    provider.givenName && provider.familyName ? " " : ""
+  }${provider.familyName ? provider.familyName : ""}${
+    (provider.givenName || provider.familyName) && provider.groupName ? "(" : ""
+  }${provider.groupName ? provider.groupName : ""}${
+    (provider.givenName || provider.familyName) && provider.groupName ? ")" : ""
+  }`;
+};

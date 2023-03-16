@@ -1,6 +1,3 @@
-import { IProvider } from "../IProvider";
-import { IDiagnosis } from "./Diagnoses/IDiagnosis";
-
 export interface IDetails {
   id?: number;
   givenName: string;

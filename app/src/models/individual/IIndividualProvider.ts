@@ -1,9 +1,9 @@
-import { IProvider } from "../IProvider";
-
 export interface IIndividualProvider {
   id?: number;
   individualId: number;
-  provider: IProvider;
+  providerId: number;
+  type: string;
   firstVisitDate?: Date;
   notes?: string;
+  isActive: boolean;
 }

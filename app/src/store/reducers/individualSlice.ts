@@ -3,14 +3,16 @@ import { RequestType } from "../../models/enums/requestType";
 import { IDetails } from "../../models/individual/IDetails";
 import { dbRequestBegin } from "../../middleware/databaseActions";
 import { AppThunk, RootState } from "../store";
-import { IDiagnosis } from "../../models/individual/Diagnoses/IDiagnosis";
+import { IDiagnosis } from "../../models/individual/IDiagnosis";
 import { IInsurance } from "../../models/individual/IInsurance";
 import { IIndividualProvider } from "../../models/individual/IIndividualProvider";
 import { IVisit } from "../../models/individual/IVisit";
+import { ITreatment } from "../../models/individual/ITreatment";
 
 interface IndividualState {
   details: IDetails;
   diagnoses: Array<IDiagnosis>;
+  treatments: Array<ITreatment>;
   insurance: Array<IInsurance>;
   providers: Array<IIndividualProvider>;
   visits: Array<IVisit>;
@@ -20,6 +22,7 @@ interface IndividualState {
 const initialState: IndividualState = {
   details: {} as IDetails,
   diagnoses: {} as Array<IDiagnosis>,
+  treatments: {} as Array<ITreatment>,
   insurance: {} as Array<IInsurance>,
   providers: {} as Array<IIndividualProvider>,
   visits: {} as Array<IVisit>,

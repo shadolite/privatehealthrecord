@@ -15,7 +15,7 @@ interface Props {
   open: boolean;
   setOpen: any;
   individual: IDetails;
-  setIndividual: any;
+  setHasChanged: any;
 }
 
 const steps = ["Details"]; //, "Diagnoses", "Treatments"];
@@ -24,7 +24,8 @@ const EditDialog: React.FunctionComponent<Props> = ({
   open,
   setOpen,
   individual,
-  setIndividual,
+  // use to update individual so view page will also update
+  setHasChanged,
 }): JSX.Element => {
   const [details, setDetails] = React.useState(individual);
   const dispatch = useAppDispatch();
@@ -32,6 +33,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
     details.id
       ? dispatch(IndividualData.saveDetails(details))
       : dispatch(IndividualData.addDetails(details));
+    setHasChanged(true);
   };
 
   const handleClose = () => {
