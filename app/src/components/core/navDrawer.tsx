@@ -19,7 +19,6 @@ import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import MedicationIcon from "@mui/icons-material/Medication";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const drawerWidth: number = 240;
 const Drawer = styled(MuiDrawer, {
@@ -90,23 +89,17 @@ const NavDrawer: React.FunctionComponent<Props> = (
             </ListItemIcon>
             <ListItemText primary="Conditions" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(AppRoute.Medication)}>
             <ListItemIcon>
               <MedicationIcon />
             </ListItemIcon>
             <ListItemText primary="Medication" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(AppRoute.Providers)}>
             <ListItemIcon>
               <LocalHospitalIcon />
             </ListItemIcon>
             <ListItemText primary="Providers" />
-          </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText primary="Visits" />
           </ListItemButton>
           <Divider sx={{ my: 1 }} />
           <ListSubheader component="div" inset>
