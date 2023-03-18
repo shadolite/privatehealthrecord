@@ -14,7 +14,7 @@ export const getMetricHeight = (feet: number, inches: number) => {
 export const getImperialHeight = (centimeters: number) => {
   let cmToFt = centimeters * centimeterToFeetRate;
   let feet = Math.floor(cmToFt);
-  let inches = Number((cmToFt % 12).toFixed(0));
+  let inches = Number(((cmToFt - feet) * 12).toFixed(0));
 
   return { feet, inches } as IHeightImperial;
 };
