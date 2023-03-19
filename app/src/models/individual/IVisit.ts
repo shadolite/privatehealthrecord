@@ -1,8 +1,7 @@
-import { IProvider } from "../IProvider";
-
 export interface IVisit {
   id?: number;
-  provider: IProvider;
+  individualId: number;
+  providerId: number;
   date: Date;
-  notes: string;
+  notes?: string;
 }

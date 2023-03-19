@@ -1,6 +1,3 @@
-import { IProvider } from "../IProvider";
-import { IDiagnosis } from "./IDiagnosis";
-
 export interface IDetails {
   id?: number;
   givenName: string;
@@ -11,8 +8,6 @@ export interface IDetails {
   bloodType?: string;
   address?: string;
   phoneNumber?: string;
-  diagnoses?: Array<IDiagnosis>;
-  providers?: Array<IProvider>;
   notes?: string;
 }
 

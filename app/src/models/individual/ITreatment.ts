@@ -1,15 +1,15 @@
-import { IMedication } from "../IMedication";
-import { IProvider } from "../IProvider";
-
 export interface ITreatment {
-  id: number;
-  medication?: IMedication;
+  id?: number;
+  individualId: number;
+  // If there is no medication id, there must be a description
+  medicationId?: number;
   description?: string;
-  frequency?: string;
   dosage?: string;
-  startOn: Date;
+  frequency?: string;
+  startOn?: Date;
   refillOn?: Date;
   endOn?: Date;
-  prescribedBy?: IProvider;
+  prescribedById?: number;
   notes?: string;
+  diagnosisIds: Array<number>;
 }
