@@ -75,6 +75,10 @@ const EditDetails: React.FunctionComponent<Props> = ({
       notes: notes == "" ? undefined : notes,
     } as IDetails;
 
+    if (details.id) {
+      newDetails.id = details.id;
+    }
+
     setDetails(newDetails);
   }, [
     givenName,

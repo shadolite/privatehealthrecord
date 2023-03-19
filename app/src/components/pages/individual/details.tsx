@@ -3,14 +3,37 @@ import * as React from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import { copyInputValue } from "../../../utilities/clickHelper";
 import Item from "../../shared/item";
+import { isEmptyOrWhiteSpace } from "../../../utilities/stringHelper";
 
 interface Props {
   details: IDetails;
 }
 
-const DetailsItem: React.FunctionComponent<Props> = (
-  props: Props
-): JSX.Element => {
+const DetailsItem: React.FunctionComponent<Props> = ({
+  details,
+}): JSX.Element => {
+  const [name, setName] = React.useState("");
+  const [birthdate, setBirthdate] = React.useState("");
+  const [height, setHeight] = React.useState("");
+  const [weight, setWeight] = React.useState("");
+  const [bloodType, setBloodType] = React.useState("");
+  const [address, setAddress] = React.useState("");
+  const [phoneNumber, setPhoneNumber] = React.useState("");
+  const [notes, setNotes] = React.useState("");
+
+  React.useEffect(() => {
+    setName(getFullName(details));
+    setBirthdate(
+      details.birthdate ? details.birthdate.toLocaleDateString() : ""
+    );
+    setHeight(details.height ? details.height.toString() : "");
+    setWeight(details.weight ? details.weight.toString() : "");
+    setBloodType(details.bloodType ? details.bloodType : "");
+    setAddress(details.address ? details.address : "");
+    setPhoneNumber(details.phoneNumber ? details.phoneNumber : "");
+    setNotes(details.notes ? details.notes : "");
+  }, [details]);
+
   return (
     <Box
       component="form"
@@ -29,95 +52,95 @@ const DetailsItem: React.FunctionComponent<Props> = (
       </Typography>
       <Item>
         <TextField
-          id="givenName"
+          id="name"
           label="Name"
           InputProps={{
             readOnly: true,
           }}
-          value={getFullName(props.details)}
+          value={name}
           inputProps={{
             onClick: copyInputValue,
           }}
         />
-        {props.details.birthdate !== undefined && (
+        {!isEmptyOrWhiteSpace(birthdate) && (
           <TextField
             id="birthdate"
             label="Birthdate"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.birthdate?.toLocaleDateString()}
+            value={birthdate}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.height !== undefined && (
+        {!isEmptyOrWhiteSpace(height) && (
           <TextField
             id="height"
             label="Height"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.height}
+            value={height}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.weight !== undefined && (
+        {!isEmptyOrWhiteSpace(weight) && (
           <TextField
             id="weight"
             label="Weight"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.weight}
+            value={weight}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.bloodType !== undefined && (
+        {!isEmptyOrWhiteSpace(bloodType) && (
           <TextField
             id="bloodType"
             label="Blood Type"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.bloodType}
+            value={bloodType}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.address !== undefined && (
+        {!isEmptyOrWhiteSpace(address) && (
           <TextField
             id="address"
             label="Address"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.address}
+            value={address}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.phoneNumber !== undefined && (
+        {!isEmptyOrWhiteSpace(phoneNumber) && (
           <TextField
             id="phoneNumber"
             label="Phone Number"
             InputProps={{
               readOnly: true,
             }}
-            value={props.details.phoneNumber}
+            value={phoneNumber}
             inputProps={{
               onClick: copyInputValue,
             }}
           />
         )}
-        {props.details.notes !== undefined && (
+        {!isEmptyOrWhiteSpace(notes) && (
           <div>
             <TextField
               id="notes"
@@ -130,7 +153,7 @@ const DetailsItem: React.FunctionComponent<Props> = (
               InputProps={{
                 readOnly: true,
               }}
-              value={props.details.notes}
+              value={notes}
               inputProps={{
                 onClick: copyInputValue,
               }}

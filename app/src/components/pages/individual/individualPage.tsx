@@ -18,6 +18,8 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const individual = useAppSelector((state) => state.individual);
   const [dialogOpen, setDialogOpen] = React.useState(false);
   const [selectedIndividualId, setSelectedIndividualId] = React.useState(1);
+  const [selectedIndividual, setSelectedIndividual] =
+    React.useState(individual);
   const [hasChanged, setHasChanged] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -27,9 +29,12 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   const dispatch = useAppDispatch();
 
   React.useEffect(() => {
-    // dispatch(deleteDetails(selectedIndividualId));
     dispatch(loadDetails(selectedIndividualId));
   }, []);
+
+  React.useEffect(() => {
+    setSelectedIndividual(individual);
+  }, [individual]);
 
   React.useEffect(() => {
     if (hasChanged) dispatch(loadDetails(selectedIndividualId));
@@ -45,15 +50,14 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
         <EditDialog
           open={dialogOpen}
           setOpen={setDialogOpen}
-          individual={individual}
           setHasChanged={setHasChanged}
         />
         <Stack spacing={2}>
-          <DetailsItem details={individual.details} />
+          <DetailsItem details={selectedIndividual.details} />
           <IndividualConditionsItem />
           <VisitsItem />
-          <ProvidersItem />
-          <InsuranceItem />
+          {/* <ProvidersItem /> */}
+          {/* <InsuranceItem /> */}
         </Stack>
       </Box>
     </React.Fragment>

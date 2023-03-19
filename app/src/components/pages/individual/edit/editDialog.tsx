@@ -14,7 +14,6 @@ import { useAppSelector, useAppDispatch } from "../../../../store/hooks";
 interface Props {
   open: boolean;
   setOpen: any;
-  individual: IDetails;
   setHasChanged: any;
 }
 
@@ -23,11 +22,11 @@ const steps = ["Details"]; //, "Diagnoses", "Treatments"];
 const EditDialog: React.FunctionComponent<Props> = ({
   open,
   setOpen,
-  individual,
   // use to update individual so view page will also update
   setHasChanged,
 }): JSX.Element => {
-  const [details, setDetails] = React.useState(individual);
+  const selectedDetails = useAppSelector(IndividualData.getDetails);
+  const [details, setDetails] = React.useState({} as IDetails);
   const dispatch = useAppDispatch();
   const saveDetails = (details: IDetails) => {
     details.id
@@ -35,6 +34,10 @@ const EditDialog: React.FunctionComponent<Props> = ({
       : dispatch(IndividualData.addDetails(details));
     setHasChanged(true);
   };
+
+  React.useEffect(() => {
+    setDetails(selectedDetails);
+  }, [selectedDetails]);
 
   const handleClose = () => {
     setOpen(false);

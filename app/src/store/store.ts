@@ -21,6 +21,8 @@ export const store: any = configureStore({
       serializableCheck: {
         // Ignore these action types
         ignoredActions: ["db/requestBegin"],
+        ignoredActionPaths: ["payload.birthdate"],
+        ignoredPaths: ["individual.details.birthdate"],
       },
     }).concat(databaseAPI),
     routerMiddleware,
