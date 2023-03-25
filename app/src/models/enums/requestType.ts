@@ -3,4 +3,8 @@ export enum RequestType {
   AddDetails,
   UpdateDetails,
   DeleteDetails,
+  GetConditions,
+  AddCondition,
+  UpdateCondition,
+  DeleteCondition,
 }
