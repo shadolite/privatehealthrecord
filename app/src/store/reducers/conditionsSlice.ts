@@ -10,7 +10,7 @@ interface ConditionsState {
 }
 
 const initialState: ConditionsState = {
-  list: {} as Array<ICondition>,
+  list: new Array<ICondition>(),
   isLoading: false,
 };
 
@@ -28,16 +28,11 @@ const conditionsSlice = createSlice({
     failed: (conditions) => {
       conditions.isLoading = false;
     },
-    added: (conditions, action: PayloadAction<ICondition>) => {
+    added: (conditions) => {
       conditions.isLoading = false;
-      conditions.list.push(action.payload);
     },
-    deleted: (conditions, action: PayloadAction<ICondition>) => {
+    deleted: (conditions) => {
       conditions.isLoading = false;
-      let deletedIndex = conditions.list.findIndex(
-        (d) => d.id == action.payload.id
-      );
-      if (deletedIndex > -1) conditions.list.splice(deletedIndex);
     },
     updated: (conditions) => {
       conditions.isLoading = false;
@@ -50,10 +45,11 @@ const { requested, received, failed, added, updated, deleted } =
   conditionsSlice.actions;
 
 // Selectors
-export const getConditions = (state: RootState) => state.conditions.list;
+export const getConditions = (state: RootState): Array<ICondition> =>
+  state.conditions.list;
 
 // Thunks
-export const loadConditions = (): AppThunk => (dispatch) =>
+export const loadConditions: AppThunk = (dispatch) =>
   dispatch(
     dbRequestBegin({
       type: RequestType.GetConditions,
