@@ -44,7 +44,6 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
   };
 
   const handleClose = () => {
-    clearFields();
     setOpen(false);
   };
   const handleNameChange = (event: any) => {
@@ -93,7 +92,7 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
             onChange={handleNotesChange}
           />
           <DialogActions></DialogActions>
-          <Button onClick={handleSaveAdd}>Save and Add Another</Button>
+          <Button onClick={handleSaveAdd}>Add Another</Button>
           <Button onClick={handleSaveClose}>Done</Button>
         </DialogContent>
       </Dialog>
