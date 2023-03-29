@@ -8,6 +8,7 @@ export interface IProvider {
   website?: string;
   address?: string;
   phoneNumber?: string;
+  email?: string;
   notes?: string;
 }
 
