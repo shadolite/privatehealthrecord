@@ -1,0 +1,53 @@
+import { ITreatment } from "../../app/src/models/individual/ITreatment";
+
+export const mockTreatments = [
+  {
+    id: 1,
+    individualId: 1,
+    medicationId: 4,
+    frequency: "once daily",
+    diagnosisIds: [1],
+    dosage: "300mg",
+    endOn: new Date("04/09/2020"),
+    prescribedById: 2,
+    notes: "Not safe with alcohol",
+  } as ITreatment,
+  {
+    id: 2,
+    individualId: 1,
+    description: "Meditation",
+    frequency: "Once Daily",
+    diagnosisIds: [1],
+    dosage: "15 minutes",
+    prescribedById: 4,
+    notes: "Pretty effective if consistent",
+  } as ITreatment,
+  {
+    id: 3,
+    individualId: 1,
+    medicationId: 1,
+    diagnosisIds: [2],
+    frequency: "three times daily",
+    dosage: "10mg",
+    prescribedById: 6,
+  } as ITreatment,
+  {
+    id: 4,
+    individualId: 1,
+    diagnosisIds: [1, 3],
+    medicationId: 3,
+    frequency: "twice daily",
+    dosage: "2mg",
+    refillOn: new Date("03/16/2013"),
+    notes: "Not FDA approved",
+  } as ITreatment,
+  {
+    id: 5,
+    individualId: 1,
+    diagnosisIds: [4],
+    medicationId: 2,
+    frequency: "once daily",
+    dosage: "10mg",
+    prescribedById: 6,
+  } as ITreatment,
+];

@@ -2,6 +2,7 @@ import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
 import individualReducer from "./reducers/individualSlice";
+import conditionsReducer from "./reducers/conditionsSlice";
 import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
@@ -11,6 +12,7 @@ const { routerMiddleware, createReduxHistory, routerReducer } =
 
 const reducer = {
   individual: individualReducer,
+  conditions: conditionsReducer,
   router: routerReducer,
 };
 
