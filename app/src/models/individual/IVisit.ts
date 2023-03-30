@@ -1,7 +1,7 @@
 export interface IVisit {
-  id?: number;
+  id: number;
   individualId: number;
   providerId: number;
   date: Date;
-  notes?: string;
+  notes: string;
 }

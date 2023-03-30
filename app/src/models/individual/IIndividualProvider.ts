@@ -1,9 +1,9 @@
 export interface IIndividualProvider {
-  id?: number;
+  id: number;
   individualId: number;
   providerId: number;
   type: string;
   firstVisitDate?: Date;
-  notes?: string;
+  notes: string;
   isActive: boolean;
 }

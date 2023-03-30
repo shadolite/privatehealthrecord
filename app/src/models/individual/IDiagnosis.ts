@@ -1,9 +1,9 @@
 export interface IDiagnosis {
-  id?: number;
+  id: number;
   individualId: number;
   conditionId: number;
   onset?: Date;
   isActive: boolean;
   diagnosedById?: number;
-  notes?: string;
+  notes: string;
 }
