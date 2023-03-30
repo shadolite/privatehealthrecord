@@ -1,6 +1,6 @@
 export interface ICondition {
-  id?: number;
+  id: number;
   name: string;
-  description?: string;
-  notes?: string;
+  description: string;
+  notes: string;
 }

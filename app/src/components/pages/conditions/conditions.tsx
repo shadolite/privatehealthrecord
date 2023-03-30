@@ -1,12 +1,7 @@
 import * as React from "react";
-import Table from "@mui/material/Table";
-import TableBody from "@mui/material/TableBody";
-import TableCell from "@mui/material/TableCell";
-import TableContainer from "@mui/material/TableContainer";
-import TableHead from "@mui/material/TableHead";
-import TableRow from "@mui/material/TableRow";
-import Toolbar from "@mui/material/Toolbar";
 import AddBoxIcon from "@mui/icons-material/AddBox";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
 import { ICondition } from "../../../models/ICondition";
 import {
   loadConditions,
@@ -15,48 +10,66 @@ import {
 } from "../../../store/reducers/conditionsSlice";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import Item from "../../shared/item";
-import { IconButton, TextField, Tooltip, Typography } from "@mui/material";
+import * as StyledTable from "../../shared/styledTableComponents";
+import {
+  IconButton,
+  TextField,
+  Tooltip,
+  Typography,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Toolbar,
+} from "@mui/material";
 import AddConditionDialog from "./addCondition";
 
 const Conditions: React.FunctionComponent = (): JSX.Element => {
   const loading = useAppSelector((state) => state.conditions.isLoading);
-  const existingConditions = useAppSelector(getConditions);
+  const conditions = useAppSelector(getConditions);
   const dispatch = useAppDispatch();
 
-  const nameColumn = "name";
-  const descriptionColumn = "description";
-  const notesColumn = "notes";
-  const updatedRowIds = new Array<number>();
-  const [conditions, setConditions] = React.useState(new Array<ICondition>());
-  const [hasUpdatedRows, setHasUpdatedRows] = React.useState(false);
-  const [rowKey, setRowKey] = React.useState(-1);
-  const [columnIndex, setColumnIndex] = React.useState(-1);
+  const [hasChanges, setHasChanges] = React.useState(false);
 
-  const handleTextFieldChange = (
-    index: number,
-    name: "name" | "description" | "notes",
-    value: string
-  ) => {
-    conditions[index][name] = value;
-    let id = Number(conditions[index].id);
-    if (!updatedRowIds.find((i) => i == id)) updatedRowIds.push(id);
-    setHasUpdatedRows(true);
+  const [isEditing, setIsEditing] = React.useState(false);
+  const [conditionName, setConditionName] = React.useState("");
+  const [conditionDescrption, setConditionDescription] = React.useState("");
+  const [conditionNotes, setConditionNotes] = React.useState("");
+  const [rowKey, setRowKey] = React.useState(-1);
+  const [columnKey, setColumnKey] = React.useState(-1);
+
+  const handleDoubleClick = (autoFocusColumn: number, row: ICondition) => {
+    setConditionName(row.name);
+    setConditionDescription(row.description);
+    setConditionNotes(row.notes);
+    setIsEditing(true);
+    setRowKey(row.id);
+    setColumnKey(autoFocusColumn);
   };
-  const handleExit = () => {
+  const resetEditValues = () => {
+    setIsEditing(false);
+    setConditionName("");
+    setConditionDescription("");
+    setConditionNotes("");
     setRowKey(-1);
-    setColumnIndex(-1);
-  };
-  const handleKeyUp = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" || event.key === "Tab") {
-      handleExit();
-    }
+    setColumnKey(-1);
   };
   const handleSaveChanges = () => {
-    throw new Error("Not implemented");
+    let updatedCondition = {
+      id: rowKey,
+      name: conditionName,
+      description: conditionDescrption,
+      notes: conditionNotes,
+    } as ICondition;
+
+    dispatch(saveCondition(updatedCondition));
+    resetEditValues();
+    setHasChanges(true);
   };
 
   const [dialogOpen, setDialogOpen] = React.useState(false);
-  const [hasAddedRows, setHasAddedRows] = React.useState(false);
   const conditionTitle = "Condition";
   const handleClickOpen = () => {
     setDialogOpen(true);
@@ -67,22 +80,18 @@ const Conditions: React.FunctionComponent = (): JSX.Element => {
   }, []);
 
   React.useEffect(() => {
-    if (hasAddedRows) {
+    if (hasChanges) {
       dispatch(loadConditions);
-      setHasAddedRows(false);
+      setHasChanges(false);
     }
-  }, [hasAddedRows]);
-
-  React.useEffect(() => {
-    if (!loading) setConditions(existingConditions);
-  }, [loading]);
+  }, [hasChanges]);
 
   return (
     <Item>
       <AddConditionDialog
         open={dialogOpen}
         setOpen={setDialogOpen}
-        setHasChanged={setHasAddedRows}
+        setHasChanged={setHasChanges}
       />
       <Toolbar>
         <Typography
@@ -92,115 +101,109 @@ const Conditions: React.FunctionComponent = (): JSX.Element => {
           component="div">
           Conditions
         </Typography>
-        <Tooltip title={`Add ${conditionTitle}`}>
+        <Tooltip title={`Add New ${conditionTitle}`}>
           <IconButton onClick={handleClickOpen}>
             <AddBoxIcon />
           </IconButton>
         </Tooltip>
-        {hasUpdatedRows && (
-          <Tooltip title={`Save`}>
-            <IconButton onClick={handleSaveChanges}>Save Changes</IconButton>
-          </Tooltip>
-        )}
       </Toolbar>
       <TableContainer>
-        <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell>Name</TableCell>
               <TableCell>Description</TableCell>
               <TableCell>Notes</TableCell>
+              {isEditing && <TableCell></TableCell>}
             </TableRow>
           </TableHead>
           <TableBody>
-            {conditions.map((row: ICondition, index: number) => (
-              <TableRow
+            {conditions.map((row: ICondition) => (
+              <StyledTable.Row
+                hover
                 key={row.id}
                 sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
-                <TableCell
+                <StyledTable.Cell
+                  aria-readonly="false"
                   component="th"
                   scope="row"
-                  onDoubleClick={() => {
-                    setRowKey(Number(row.id));
-                    setColumnIndex(0);
+                  onDoubleClick={(event) => {
+                    handleDoubleClick(1, row);
                   }}>
-                  {rowKey === row.id && columnIndex === 0 ? (
+                  {rowKey === row.id ? (
                     <TextField
+                      autoFocus={columnKey === 1}
+                      size="small"
+                      fullWidth
+                      margin="none"
                       placeholder={row.name}
-                      defaultValue={conditions[index][nameColumn]}
-                      onChange={(event) =>
-                        handleTextFieldChange(
-                          index,
-                          nameColumn,
-                          event.target.value
-                        )
-                      }
-                      onBlur={handleExit}
-                      onKeyUp={handleKeyUp}
+                      value={conditionName}
+                      onChange={(event) => setConditionName(event.target.value)}
                     />
                   ) : (
                     row.name
                   )}
-                </TableCell>
-                <TableCell
+                </StyledTable.Cell>
+                <StyledTable.Cell
                   component="th"
                   scope="row"
-                  onDoubleClick={() => {
-                    setRowKey(index);
-                    setColumnIndex(1);
+                  onDoubleClick={(event) => {
+                    handleDoubleClick(2, row);
                   }}>
-                  {rowKey === index && columnIndex === 1 ? (
+                  {rowKey === row.id ? (
                     <TextField
+                      autoFocus={columnKey === 2}
+                      size="small"
+                      fullWidth
                       placeholder={row.description}
-                      defaultValue={
-                        conditions[index][descriptionColumn]
-                          ? conditions[index][descriptionColumn]
-                          : ""
-                      }
+                      value={conditionDescrption}
                       onChange={(event) =>
-                        handleTextFieldChange(
-                          index,
-                          descriptionColumn,
-                          event.target.value
-                        )
+                        setConditionDescription(event.target.value)
                       }
-                      onBlur={handleExit}
-                      onKeyUp={handleKeyUp}
                     />
                   ) : (
                     row.description
                   )}
-                </TableCell>
-                <TableCell
+                </StyledTable.Cell>
+                <StyledTable.Cell
                   component="th"
                   scope="row"
-                  onDoubleClick={() => {
-                    setRowKey(index);
-                    setColumnIndex(2);
+                  onDoubleClick={(event) => {
+                    handleDoubleClick(3, row);
                   }}>
-                  {rowKey === index && columnIndex === 2 ? (
+                  {rowKey === row.id ? (
                     <TextField
+                      autoFocus={columnKey === 3}
+                      size="small"
+                      fullWidth
                       placeholder={row.notes}
-                      defaultValue={
-                        conditions[index][notesColumn]
-                          ? conditions[index][notesColumn]
-                          : ""
-                      }
+                      value={conditionNotes}
                       onChange={(event) =>
-                        handleTextFieldChange(
-                          index,
-                          notesColumn,
-                          event.target.value
-                        )
+                        setConditionNotes(event.target.value)
                       }
-                      onBlur={handleExit}
-                      onKeyUp={handleKeyUp}
                     />
                   ) : (
                     row.notes
                   )}
-                </TableCell>
-              </TableRow>
+                </StyledTable.Cell>
+                {isEditing &&
+                  (rowKey === row.id ? (
+                    <StyledTable.Cell>
+                      <Tooltip title={`Save`}>
+                        <IconButton onClick={handleSaveChanges}>
+                          <CheckCircleIcon />
+                        </IconButton>
+                      </Tooltip>
+                      <Tooltip title={`Cancel`}>
+                        <IconButton onClick={resetEditValues}>
+                          <CancelIcon />
+                        </IconButton>
+                      </Tooltip>
+                    </StyledTable.Cell>
+                  ) : (
+                    <StyledTable.Cell></StyledTable.Cell>
+                  ))}
+              </StyledTable.Row>
             ))}
           </TableBody>
         </Table>
