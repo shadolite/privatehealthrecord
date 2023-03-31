@@ -12,8 +12,11 @@ import {
   ListSubheader,
   styled,
   Toolbar,
+  Tooltip,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DisplaySettingsOutlinedIcon from "@mui/icons-material/DisplaySettingsOutlined";
+import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -78,19 +81,21 @@ const NavDrawer: React.FunctionComponent<Props> = (
         </Toolbar>
         <Divider />
         <List component="nav">
-          <ListItemButton onClick={() => navigate(AppRoute.Individual)}>
-            <ListItemIcon>
-              <AccountBoxIcon />
-            </ListItemIcon>
-            <ListItemText primary="Individual" />
-          </ListItemButton>
+          <Tooltip title={"Individual"}>
+            <ListItemButton onClick={() => navigate(AppRoute.Individual)}>
+              <ListItemIcon>
+                <AccountBoxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Individual" />
+            </ListItemButton>
+          </Tooltip>
           <ListItemButton onClick={() => navigate(AppRoute.Conditions)}>
             <ListItemIcon>
               <MonitorHeartIcon />
             </ListItemIcon>
             <ListItemText primary="Conditions" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(AppRoute.Medications)}>
             <ListItemIcon>
               <MedicationIcon />
             </ListItemIcon>
@@ -114,9 +119,15 @@ const NavDrawer: React.FunctionComponent<Props> = (
           </ListSubheader>
           <ListItemButton>
             <ListItemIcon>
-              <ManageAccountsIcon />
+              <DisplaySettingsOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Display" />
+          </ListItemButton>
+          <ListItemButton onClick={() => navigate(AppRoute.DataSettings)}>
+            <ListItemIcon>
+              <StorageOutlinedIcon />
+            </ListItemIcon>
+            <ListItemText primary="Data" />
           </ListItemButton>
         </List>
       </Drawer>

@@ -1,8 +1,10 @@
 import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
 import { createHashHistory } from "history";
 import { createReduxHistoryContext } from "redux-first-history";
+import dataReducer from "./reducers/dataSlice";
 import individualReducer from "./reducers/individualSlice";
 import conditionsReducer from "./reducers/conditionsSlice";
+import medicationsReducer from "./reducers/medicationsSlice";
 import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
@@ -11,8 +13,10 @@ const { routerMiddleware, createReduxHistory, routerReducer } =
   });
 
 const reducer = {
+  data: dataReducer,
   individual: individualReducer,
   conditions: conditionsReducer,
+  medications: medicationsReducer,
   router: routerReducer,
 };
 

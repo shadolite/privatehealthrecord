@@ -24,9 +24,9 @@ import {
   TableRow,
   Toolbar,
 } from "@mui/material";
-import AddConditionDialog from "./addCondition";
+import AddConditionDialog from "./addConditionDialog";
 
-const Conditions: React.FunctionComponent = (): JSX.Element => {
+const ConditionsPage: React.FunctionComponent = (): JSX.Element => {
   const loading = useAppSelector((state) => state.conditions.isLoading);
   const conditions = useAppSelector(getConditions);
   const dispatch = useAppDispatch();
@@ -212,4 +212,4 @@ const Conditions: React.FunctionComponent = (): JSX.Element => {
   );
 };
 
-export default Conditions;
+export default ConditionsPage;

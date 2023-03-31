@@ -51,9 +51,10 @@ const Dash: React.FunctionComponent<Props> = (props: Props): JSX.Element => {
       <CssBaseline />
       <AppBar position="absolute" open={open}>
         <Toolbar
-          sx={{
-            pr: "24px", // keep right padding when drawer closed
-          }}>
+        // sx={{
+        //   pr: "24px", // keep right padding when drawer closed
+        // }}>
+        >
           <IconButton
             edge="start"
             color="inherit"

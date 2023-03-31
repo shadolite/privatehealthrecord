@@ -5,10 +5,10 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { ICondition } from "../../../models/ICondition";
-import * as ConditionData from "../../../store/reducers/conditionsSlice";
-import { useAppSelector, useAppDispatch } from "../../../store/hooks";
+import * as MedicationData from "../../../store/reducers/medicationsSlice";
+import { useAppDispatch } from "../../../store/hooks";
 import { TextField } from "@mui/material";
+import { IMedication } from "../../../models/IMedication";
 
 interface Props {
   open: boolean;
@@ -16,7 +16,7 @@ interface Props {
   setHasChanged: any;
 }
 
-const AddConditionDialog: React.FunctionComponent<Props> = ({
+const AddMedicationDialog: React.FunctionComponent<Props> = ({
   open,
   setOpen,
   setHasChanged,
@@ -26,8 +26,8 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
   const [notes, setNotes] = React.useState("");
 
   const dispatch = useAppDispatch();
-  const addCondition = (condition: ICondition) => {
-    dispatch(ConditionData.addCondition(condition));
+  const addMedication = (medication: IMedication) => {
+    dispatch(MedicationData.addMedication(medication));
     setHasChanged(true);
   };
   const clearFields = () => {
@@ -35,12 +35,12 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
     setDescription("");
     setNotes("");
   };
-  const getCondition = () => {
+  const getMedication = () => {
     return {
       name: name,
       description: description,
       notes: notes,
-    } as ICondition;
+    } as IMedication;
   };
 
   const handleClose = () => {
@@ -56,13 +56,13 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
     setNotes(event.target.value);
   };
   const handleSaveAdd = () => {
-    let condition = getCondition();
-    addCondition(condition);
+    let medication = getMedication();
+    addMedication(medication);
     clearFields();
   };
   const handleSaveClose = () => {
-    let condition = getCondition();
-    addCondition(condition);
+    let medication = getMedication();
+    addMedication(medication);
     clearFields();
     setOpen(false);
   };
@@ -70,10 +70,11 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
   return (
     <div>
       <Dialog fullWidth={true} maxWidth="lg" open={open} onClose={handleClose}>
-        <DialogTitle>Add Condition</DialogTitle>
+        <DialogTitle>Add Medication</DialogTitle>
         <DialogContent>
           <DialogContentText></DialogContentText>
           <TextField
+            autoFocus
             id="name"
             label="Name"
             value={name}
@@ -100,4 +101,4 @@ const AddConditionDialog: React.FunctionComponent<Props> = ({
   );
 };
 
-export default AddConditionDialog;
+export default AddMedicationDialog;

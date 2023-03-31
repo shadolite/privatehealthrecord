@@ -1,7 +1,7 @@
 import { ICondition } from "../models/ICondition";
 import { PHRDatabase } from "./database";
 
-export const get = async (database: PHRDatabase) => {
+export const getAll = async (database: PHRDatabase) => {
   return await database.condition.toArray();
 };
 
