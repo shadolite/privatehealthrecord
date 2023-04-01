@@ -4,10 +4,10 @@ import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 import CancelIcon from "@mui/icons-material/Cancel";
 import { IMedication } from "../../../models/IMedication";
 import {
-  loadMedications,
-  getMedications,
+  loadMedication,
+  getAllMedication,
   saveMedication,
-} from "../../../store/reducers/medicationsSlice";
+} from "../../../store/reducers/medicationSlice";
 import { useAppSelector, useAppDispatch } from "../../../store/hooks";
 import Item from "../../shared/item";
 import * as StyledTable from "../../shared/styledTableComponents";
@@ -28,7 +28,7 @@ import AddMedicationDialog from "./addMedicationDialog";
 
 const MedicationsPage: React.FunctionComponent = (): JSX.Element => {
   const loading = useAppSelector((state) => state.medications.isLoading);
-  const medications = useAppSelector(getMedications);
+  const medications = useAppSelector(getAllMedication);
   const dispatch = useAppDispatch();
 
   const [hasChanges, setHasChanges] = React.useState(false);
@@ -75,12 +75,12 @@ const MedicationsPage: React.FunctionComponent = (): JSX.Element => {
   };
 
   React.useEffect(() => {
-    dispatch(loadMedications);
+    dispatch(loadMedication);
   }, []);
 
   React.useEffect(() => {
     if (hasChanges) {
-      dispatch(loadMedications);
+      dispatch(loadMedication);
       setHasChanges(false);
     }
   }, [hasChanges]);

@@ -7,7 +7,7 @@ export enum RequestType {
   AddCondition,
   UpdateCondition,
   DeleteCondition,
-  GetMedications,
+  GetAllMedication,
   AddMedication,
   UpdateMedication,
   DeleteMedication,

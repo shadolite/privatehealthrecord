@@ -45,7 +45,7 @@ const requestFunction: EnumDictionary<RequestType, Function> = {
   [RequestType.AddCondition]: Conditions.add,
   [RequestType.UpdateCondition]: Conditions.update,
   [RequestType.DeleteCondition]: Conditions.remove,
-  [RequestType.GetMedications]: Medication.getAll,
+  [RequestType.GetAllMedication]: Medication.getAll,
   [RequestType.AddMedication]: Medication.add,
   [RequestType.UpdateMedication]: Medication.update,
   [RequestType.DeleteMedication]: Medication.remove,
