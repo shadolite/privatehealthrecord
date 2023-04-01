@@ -26,9 +26,9 @@ import {
 } from "@mui/material";
 import AddMedicationDialog from "./addMedicationDialog";
 
-const MedicationsPage: React.FunctionComponent = (): JSX.Element => {
-  const loading = useAppSelector((state) => state.medications.isLoading);
-  const medications = useAppSelector(getAllMedication);
+const MedicationPage: React.FunctionComponent = (): JSX.Element => {
+  const loading = useAppSelector((state) => state.medication.isLoading);
+  const medication = useAppSelector(getAllMedication);
   const dispatch = useAppDispatch();
 
   const [hasChanges, setHasChanges] = React.useState(false);
@@ -117,7 +117,7 @@ const MedicationsPage: React.FunctionComponent = (): JSX.Element => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {medications.map((row: IMedication) => (
+            {medication.map((row: IMedication) => (
               <StyledTable.Row
                 hover
                 key={row.id}
@@ -213,4 +213,4 @@ const MedicationsPage: React.FunctionComponent = (): JSX.Element => {
   );
 };
 
-export default MedicationsPage;
+export default MedicationPage;

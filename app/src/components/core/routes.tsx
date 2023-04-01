@@ -7,7 +7,7 @@ import loadable from "@loadable/component";
 const Individual = loadable(() => import("../pages/individual/individualPage"));
 const Conditions = loadable(() => import("../pages/conditions/conditionsPage"));
 const Medications = loadable(
-  () => import("../pages/medication/medicationsPage")
+  () => import("../pages/medication/medicationPage")
 );
 const Settings = loadable(() => import("../pages/settings/dataSettingsPage"));
 
