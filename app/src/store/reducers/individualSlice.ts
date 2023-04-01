@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestType } from "../../models/enums/requestType";
-import { IDetail } from "../../models/individual/IDetail";
+import { IDetails } from "../../models/individual/IDetails";
 import { dbRequestBegin } from "../../middleware/databaseActions";
 import { AppThunk, RootState } from "../store";
 import { IDiagnosis } from "../../models/individual/IDiagnosis";
@@ -10,7 +10,7 @@ import { IVisit } from "../../models/individual/IVisit";
 import { ITreatment } from "../../models/individual/ITreatment";
 
 interface IndividualState {
-  detail: IDetail;
+  detail: IDetails;
   diagnoses: Array<IDiagnosis>;
   treatments: Array<ITreatment>;
   insurance: Array<IInsurance>;
@@ -20,7 +20,7 @@ interface IndividualState {
 }
 
 const initialState: IndividualState = {
-  detail: {} as IDetail,
+  detail: {} as IDetails,
   diagnoses: {} as Array<IDiagnosis>,
   treatments: {} as Array<ITreatment>,
   insurance: {} as Array<IInsurance>,
@@ -36,7 +36,7 @@ const individualSlice = createSlice({
     requested: (individual) => {
       individual.isLoading = true;
     },
-    received: (individual, action: PayloadAction<IDetail>) => {
+    received: (individual, action: PayloadAction<IDetails>) => {
       individual.isLoading = false;
       if (action.payload) individual.detail = action.payload;
     },
@@ -79,7 +79,7 @@ export const loadDetails =
     );
 
 export const addDetails =
-  (details: IDetail): AppThunk =>
+  (details: IDetails): AppThunk =>
   (dispatch) =>
     dispatch(
       dbRequestBegin({
@@ -92,7 +92,7 @@ export const addDetails =
     );
 
 export const saveDetails =
-  (details: IDetail): AppThunk =>
+  (details: IDetails): AppThunk =>
   (dispatch) =>
     dispatch(
       dbRequestBegin({

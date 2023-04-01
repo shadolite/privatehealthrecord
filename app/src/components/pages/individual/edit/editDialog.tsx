@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IDetail } from "../../../../models/individual/IDetail";
+import { IDetails } from "../../../../models/individual/IDetails";
 import { Box, Step, StepButton, Stepper, Typography } from "@mui/material";
 import * as IndividualData from "../../../../store/reducers/individualSlice";
 import EditDetails from "./editDetails";
@@ -26,9 +26,9 @@ const EditDialog: React.FunctionComponent<Props> = ({
   setHasChanged,
 }): JSX.Element => {
   const selectedDetails = useAppSelector(IndividualData.getDetail);
-  const [details, setDetails] = React.useState({} as IDetail);
+  const [details, setDetails] = React.useState({} as IDetails);
   const dispatch = useAppDispatch();
-  const saveDetails = (details: IDetail) => {
+  const saveDetails = (details: IDetails) => {
     details.id
       ? dispatch(IndividualData.saveDetails(details))
       : dispatch(IndividualData.addDetails(details));
