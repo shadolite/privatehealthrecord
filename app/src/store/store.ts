@@ -5,6 +5,7 @@ import dataReducer from "./reducers/dataSlice";
 import individualReducer from "./reducers/individualSlice";
 import conditionsReducer from "./reducers/conditionsSlice";
 import medicationReducer from "./reducers/medicationSlice";
+import providersReducer from "./reducers/providersSlice";
 import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
@@ -17,6 +18,7 @@ const reducer = {
   individual: individualReducer,
   conditions: conditionsReducer,
   medication: medicationReducer,
+  providers: providersReducer,
   router: routerReducer,
 };
 
