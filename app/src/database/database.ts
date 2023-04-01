@@ -1,16 +1,19 @@
 import Dexie, { Table } from "dexie";
 import { RequestType } from "../models/enums/requestType";
 import { ICondition } from "../models/ICondition";
-import { IDetails } from "../models/individual/IDetails";
-import * as Details from "./individual/details";
-import * as Conditions from "./conditions";
+import { IDetail } from "../models/individual/IDetail";
+import * as Detail from "./individual/detail";
+import * as Condition from "./condition";
 import * as Medication from "./medication";
+import * as Provider from "./provider";
 import { IMedication } from "../models/IMedication";
+import { IProvider } from "../models/IProvider";
 
 export class PHRDatabase extends Dexie {
-  details!: Table<IDetails, number>;
+  detail!: Table<IDetail, number>;
   condition!: Table<ICondition, number>;
   medication!: Table<IMedication, number>;
+  provider!: Table<IProvider, number>;
 
   constructor() {
     super("phr");
@@ -18,6 +21,7 @@ export class PHRDatabase extends Dexie {
       details: "++id",
       condition: "++id",
       medication: "++id",
+      provider: "++id",
     });
   }
 
@@ -28,20 +32,28 @@ export class PHRDatabase extends Dexie {
 
 export const database = new PHRDatabase();
 
+const resetDatabase = async (db: PHRDatabase, data: any) => {
+  return await db.delete();
+};
+
 const requestFunction: EnumDictionary<RequestType, Function> = {
-  [RequestType.GetDetails]: Details.get,
-  [RequestType.AddDetails]: Details.add,
-  [RequestType.UpdateDetails]: Details.update,
-  [RequestType.DeleteDetails]: Details.deleteDetails,
-  [RequestType.GetConditions]: Conditions.getAll,
-  [RequestType.AddCondition]: Conditions.add,
-  [RequestType.UpdateCondition]: Conditions.update,
-  [RequestType.DeleteCondition]: Conditions.deleteCondition,
+  [RequestType.GetDetail]: Detail.get,
+  [RequestType.AddDetail]: Detail.add,
+  [RequestType.UpdateDetail]: Detail.update,
+  [RequestType.DeleteDetail]: Detail.deleteDetail,
+  [RequestType.GetConditions]: Condition.getAll,
+  [RequestType.AddCondition]: Condition.add,
+  [RequestType.UpdateCondition]: Condition.update,
+  [RequestType.DeleteCondition]: Condition.deleteCondition,
   [RequestType.GetMedications]: Medication.getAll,
   [RequestType.AddMedication]: Medication.add,
   [RequestType.UpdateMedication]: Medication.update,
   [RequestType.DeleteMedication]: Medication.deleteMedication,
-  [RequestType.DeleteDatabase]: database.delete,
+  [RequestType.DeleteDatabase]: resetDatabase,
+  [RequestType.GetProviders]: Provider.getAll,
+  [RequestType.AddProvider]: Provider.add,
+  [RequestType.UpdateProvider]: Provider.update,
+  [RequestType.DeleteProvider]: Provider.deleteProvider,
 };
 
 type EnumDictionary<T extends string | symbol | number, U> = {

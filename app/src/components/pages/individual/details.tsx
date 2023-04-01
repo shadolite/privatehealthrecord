@@ -1,4 +1,4 @@
-import { IDetails, getFullName } from "../../../models/individual/IDetails";
+import { IDetail, getFullName } from "../../../models/individual/IDetail";
 import * as React from "react";
 import { Box, TextField, Typography } from "@mui/material";
 import { copyInputValue } from "../../../utilities/clickHelper";
@@ -6,7 +6,7 @@ import Item from "../../shared/item";
 import { isEmptyOrWhiteSpace } from "../../../utilities/stringHelper";
 
 interface Props {
-  details: IDetails;
+  details: IDetail;
 }
 
 const DetailsItem: React.FunctionComponent<Props> = ({

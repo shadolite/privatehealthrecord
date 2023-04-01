@@ -1,4 +1,4 @@
-import { IDetails } from "../../../../models/individual/IDetails";
+import { IDetail } from "../../../../models/individual/IDetail";
 import * as React from "react";
 import { Box, TextField } from "@mui/material";
 import Item from "../../../shared/item";
@@ -6,8 +6,8 @@ import MeasurementFormControl from "./editMeasurements";
 import { BloodType } from "../../../../models/enums/bloodType";
 
 interface Props {
-  details: IDetails;
-  setDetails: (details: IDetails) => void;
+  details: IDetail;
+  setDetails: (details: IDetail) => void;
 }
 
 const EditDetails: React.FunctionComponent<Props> = ({
@@ -73,7 +73,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
       address: address == "" ? undefined : address,
       phoneNumber: phoneNumber == "" ? undefined : phoneNumber,
       notes: notes == "" ? undefined : notes,
-    } as IDetails;
+    } as IDetail;
 
     if (details.id) {
       newDetails.id = details.id;

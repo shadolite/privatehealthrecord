@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RequestType } from "../../models/enums/requestType";
-import { IDetails } from "../../models/individual/IDetails";
+import { IDetail } from "../../models/individual/IDetail";
 import { dbRequestBegin } from "../../middleware/databaseActions";
 import { AppThunk, RootState } from "../store";
 import { IDiagnosis } from "../../models/individual/IDiagnosis";
@@ -10,7 +10,7 @@ import { IVisit } from "../../models/individual/IVisit";
 import { ITreatment } from "../../models/individual/ITreatment";
 
 interface IndividualState {
-  details: IDetails;
+  detail: IDetail;
   diagnoses: Array<IDiagnosis>;
   treatments: Array<ITreatment>;
   insurance: Array<IInsurance>;
@@ -20,7 +20,7 @@ interface IndividualState {
 }
 
 const initialState: IndividualState = {
-  details: {} as IDetails,
+  detail: {} as IDetail,
   diagnoses: {} as Array<IDiagnosis>,
   treatments: {} as Array<ITreatment>,
   insurance: {} as Array<IInsurance>,
@@ -36,20 +36,20 @@ const individualSlice = createSlice({
     requested: (individual) => {
       individual.isLoading = true;
     },
-    received: (individual, action: PayloadAction<IDetails>) => {
+    received: (individual, action: PayloadAction<IDetail>) => {
       individual.isLoading = false;
-      if (action.payload) individual.details = action.payload;
+      if (action.payload) individual.detail = action.payload;
     },
     failed: (individual) => {
       individual.isLoading = false;
     },
     added: (individual, action: PayloadAction<number>) => {
       individual.isLoading = false;
-      individual.details.id = action.payload;
+      individual.detail.id = action.payload;
     },
     deleted: (individual) => {
       individual.isLoading = false;
-      individual.details = initialState.details;
+      individual.detail = initialState.detail;
     },
     updated: (individual) => {
       individual.isLoading = false;
@@ -62,7 +62,7 @@ const { requested, received, failed, added, updated, deleted } =
   individualSlice.actions;
 
 // Selectors
-export const getDetails = (state: RootState) => state.individual.details;
+export const getDetail = (state: RootState) => state.individual.detail;
 
 // Thunks
 export const loadDetails =
@@ -70,7 +70,7 @@ export const loadDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.GetDetails,
+        type: RequestType.GetDetail,
         data: individualId,
         onStart: requested.type,
         onSuccess: received.type,
@@ -79,11 +79,11 @@ export const loadDetails =
     );
 
 export const addDetails =
-  (details: IDetails): AppThunk =>
+  (details: IDetail): AppThunk =>
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.AddDetails,
+        type: RequestType.AddDetail,
         data: details,
         onStart: requested.type,
         onSuccess: added.type,
@@ -92,11 +92,11 @@ export const addDetails =
     );
 
 export const saveDetails =
-  (details: IDetails): AppThunk =>
+  (details: IDetail): AppThunk =>
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.UpdateDetails,
+        type: RequestType.UpdateDetail,
         data: details,
         onStart: requested.type,
         onSuccess: updated.type,
@@ -109,7 +109,7 @@ export const deleteDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.DeleteDetails,
+        type: RequestType.DeleteDetail,
         data: individualId,
         onStart: requested.type,
         onSuccess: deleted.type,

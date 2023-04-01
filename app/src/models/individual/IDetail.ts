@@ -1,6 +1,6 @@
 import { isEmptyOrWhiteSpace } from "../../utilities/stringHelper";
 
-export interface IDetails {
+export interface IDetail {
   id?: number;
   givenName: string;
   familyName: string;
@@ -13,7 +13,7 @@ export interface IDetails {
   notes: string;
 }
 
-export const getFullName = (details: IDetails) => {
+export const getFullName = (details: IDetail) => {
   if (!isEmptyOrWhiteSpace(details.familyName))
     return `${details.givenName} ${details.familyName}`;
   else return details.givenName;

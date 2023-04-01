@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import { IDetails } from "../../../../models/individual/IDetails";
+import { IDetail } from "../../../../models/individual/IDetail";
 import { Box, Step, StepButton, Stepper, Typography } from "@mui/material";
 import * as IndividualData from "../../../../store/reducers/individualSlice";
 import EditDetails from "./editDetails";
@@ -25,10 +25,10 @@ const EditDialog: React.FunctionComponent<Props> = ({
   // use to update individual so view page will also update
   setHasChanged,
 }): JSX.Element => {
-  const selectedDetails = useAppSelector(IndividualData.getDetails);
-  const [details, setDetails] = React.useState({} as IDetails);
+  const selectedDetails = useAppSelector(IndividualData.getDetail);
+  const [details, setDetails] = React.useState({} as IDetail);
   const dispatch = useAppDispatch();
-  const saveDetails = (details: IDetails) => {
+  const saveDetails = (details: IDetail) => {
     details.id
       ? dispatch(IndividualData.saveDetails(details))
       : dispatch(IndividualData.addDetails(details));

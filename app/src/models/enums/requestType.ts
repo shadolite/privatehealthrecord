@@ -1,8 +1,8 @@
 export enum RequestType {
-  GetDetails,
-  AddDetails,
-  UpdateDetails,
-  DeleteDetails,
+  GetDetail,
+  AddDetail,
+  UpdateDetail,
+  DeleteDetail,
   GetConditions,
   AddCondition,
   UpdateCondition,
@@ -11,5 +11,9 @@ export enum RequestType {
   AddMedication,
   UpdateMedication,
   DeleteMedication,
+  GetProviders,
+  AddProvider,
+  UpdateProvider,
+  DeleteProvider,
   DeleteDatabase,
 }
