@@ -1,7 +1,7 @@
 import { isEmptyOrWhiteSpace } from "../../utilities/stringHelper";
 
 export interface IDetails {
-  id?: number;
+  id: number;
   givenName: string;
   familyName: string;
   birthdate?: Date;

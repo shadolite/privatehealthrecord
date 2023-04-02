@@ -10,6 +10,7 @@ export interface IProvider {
   website: string;
   address: string;
   phoneNumber: string;
+  fax: string;
   email: string;
   notes: string;
 }
