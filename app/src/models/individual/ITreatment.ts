@@ -3,13 +3,13 @@ export interface ITreatment {
   individualId: number;
   // If there is no medication id, there must be a description
   medicationId?: number;
-  description: string;
-  dosage: string;
-  frequency: string;
+  description?: string;
+  dosage?: string;
+  frequency?: string;
   startOn?: Date;
   refillOn?: Date;
   endOn?: Date;
   prescribedById?: number;
-  notes: string;
+  notes?: string;
   diagnosisIds: Array<number>;
 }
