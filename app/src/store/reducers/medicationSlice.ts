@@ -46,7 +46,7 @@ const { requested, received, failed, added, updated, deleted } =
 
 // Selectors
 export const getAllMedication = (state: RootState): Array<IMedication> =>
-  state.medications.list;
+  state.medication.list;
 
 // Thunks
 export const loadMedication: AppThunk = (dispatch) =>

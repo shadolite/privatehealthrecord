@@ -25,7 +25,7 @@ const EditDialog: React.FunctionComponent<Props> = ({
   // use to update individual so view page will also update
   setHasChanged,
 }): JSX.Element => {
-  const selectedDetails = useAppSelector(IndividualData.getDetail);
+  const selectedDetails = useAppSelector(IndividualData.getDetails);
   const [details, setDetails] = React.useState({} as IDetails);
   const dispatch = useAppDispatch();
   const saveDetails = (details: IDetails) => {

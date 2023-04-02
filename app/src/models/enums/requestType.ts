@@ -1,5 +1,5 @@
 export enum RequestType {
-  GetDetail,
+  GetDetails,
   AddDetail,
   UpdateDetail,
   DeleteDetail,

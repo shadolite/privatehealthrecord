@@ -37,7 +37,7 @@ const resetDatabase = async (db: PHRDatabase, data: any) => {
 };
 
 const requestFunction: EnumDictionary<RequestType, Function> = {
-  [RequestType.GetDetail]: Details.get,
+  [RequestType.GetDetails]: Details.get,
   [RequestType.AddDetail]: Details.add,
   [RequestType.UpdateDetail]: Details.update,
   [RequestType.DeleteDetail]: Details.deleteDetail,

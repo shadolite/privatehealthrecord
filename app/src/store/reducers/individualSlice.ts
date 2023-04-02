@@ -10,7 +10,7 @@ import { IVisit } from "../../models/individual/IVisit";
 import { ITreatment } from "../../models/individual/ITreatment";
 
 interface IndividualState {
-  detail: IDetails;
+  details: IDetails;
   diagnoses: Array<IDiagnosis>;
   treatments: Array<ITreatment>;
   insurance: Array<IInsurance>;
@@ -20,7 +20,7 @@ interface IndividualState {
 }
 
 const initialState: IndividualState = {
-  detail: {} as IDetails,
+  details: {} as IDetails,
   diagnoses: {} as Array<IDiagnosis>,
   treatments: {} as Array<ITreatment>,
   insurance: {} as Array<IInsurance>,
@@ -38,18 +38,18 @@ const individualSlice = createSlice({
     },
     received: (individual, action: PayloadAction<IDetails>) => {
       individual.isLoading = false;
-      if (action.payload) individual.detail = action.payload;
+      if (action.payload) individual.details = action.payload;
     },
     failed: (individual) => {
       individual.isLoading = false;
     },
     added: (individual, action: PayloadAction<number>) => {
       individual.isLoading = false;
-      individual.detail.id = action.payload;
+      individual.details.id = action.payload;
     },
     deleted: (individual) => {
       individual.isLoading = false;
-      individual.detail = initialState.detail;
+      individual.details = initialState.details;
     },
     updated: (individual) => {
       individual.isLoading = false;
@@ -62,7 +62,7 @@ const { requested, received, failed, added, updated, deleted } =
   individualSlice.actions;
 
 // Selectors
-export const getDetail = (state: RootState) => state.individual.detail;
+export const getDetails = (state: RootState) => state.individual.details;
 
 // Thunks
 export const loadDetails =
@@ -70,7 +70,7 @@ export const loadDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.GetDetail,
+        type: RequestType.GetDetails,
         data: individualId,
         onStart: requested.type,
         onSuccess: received.type,
