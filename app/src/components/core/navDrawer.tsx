@@ -95,34 +95,28 @@ const NavDrawer: React.FunctionComponent<Props> = (
             </ListItemIcon>
             <ListItemText primary="Conditions" />
           </ListItemButton>
-          <ListItemButton onClick={() => navigate(AppRoute.Medications)}>
+          <ListItemButton onClick={() => navigate(AppRoute.Medication)}>
             <ListItemIcon>
               <MedicationIcon />
             </ListItemIcon>
             <ListItemText primary="Medication" />
           </ListItemButton>
-          <ListItemButton>
+          <ListItemButton onClick={() => navigate(AppRoute.Providers)}>
             <ListItemIcon>
               <LocalHospitalIcon />
             </ListItemIcon>
             <ListItemText primary="Providers" />
           </ListItemButton>
-          <ListItemButton>
-            <ListItemIcon>
-              <CalendarMonthIcon />
-            </ListItemIcon>
-            <ListItemText primary="Visits" />
-          </ListItemButton>
           <Divider sx={{ my: 1 }} />
           <ListSubheader component="div" inset>
             Settings
           </ListSubheader>
-          <ListItemButton>
+          {/* <ListItemButton>
             <ListItemIcon>
               <DisplaySettingsOutlinedIcon />
             </ListItemIcon>
             <ListItemText primary="Display" />
-          </ListItemButton>
+          </ListItemButton> */}
           <ListItemButton onClick={() => navigate(AppRoute.DataSettings)}>
             <ListItemIcon>
               <StorageOutlinedIcon />

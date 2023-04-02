@@ -48,18 +48,18 @@ const ProvidersPage: React.FunctionComponent = (): JSX.Element => {
   const [columnKey, setColumnKey] = React.useState(-1);
 
   const handleDoubleClick = (autoFocusColumn: number, row: IProvider) => {
-    setProviderGivenName(row.givenName);
-    setProviderFamilyName(row.familyName);
-    setProviderGroupName(row.groupName);
-    setProviderType(row.type);
-    setProviderWebsite(row.website);
-    setProviderAddress(row.address);
-    setProviderPhoneNumber(row.phoneNumber);
-    setProviderFax(row.fax);
-    setProviderEmail(row.email);
-    setProviderNotes(row.notes);
+    setProviderGivenName(row.givenName ? row.givenName : "");
+    setProviderFamilyName(row.familyName ? row.familyName : "");
+    setProviderGroupName(row.groupName ? row.groupName : "");
+    setProviderType(row.type ? row.type : "");
+    setProviderWebsite(row.website ? row.website : "");
+    setProviderAddress(row.address ? row.address : "");
+    setProviderPhoneNumber(row.phoneNumber ? row.phoneNumber : "");
+    setProviderFax(row.fax ? row.fax : "");
+    setProviderEmail(row.email ? row.email : "");
+    setProviderNotes(row.notes ? row.notes : "");
     setIsEditing(true);
-    setRowKey(row.id);
+    setRowKey(Number(row.id));
     setColumnKey(autoFocusColumn);
   };
   const resetEditValues = () => {
@@ -128,7 +128,7 @@ const ProvidersPage: React.FunctionComponent = (): JSX.Element => {
           variant="h6"
           id="tableTitle"
           component="div">
-          Provider
+          Providers
         </Typography>
         <Tooltip title={`Add New Provider`}>
           <IconButton onClick={handleClickOpen}>
@@ -140,8 +140,15 @@ const ProvidersPage: React.FunctionComponent = (): JSX.Element => {
         <Table stickyHeader sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell>Description</TableCell>
+              <TableCell>Given Name</TableCell>
+              <TableCell>Family Name</TableCell>
+              <TableCell>Group Name</TableCell>
+              <TableCell>Type</TableCell>
+              <TableCell>Website</TableCell>
+              <TableCell>Address</TableCell>
+              <TableCell>Phone Number</TableCell>
+              <TableCell>Fax</TableCell>
+              <TableCell>Email</TableCell>
               <TableCell>Notes</TableCell>
               {isEditing && <TableCell></TableCell>}
             </TableRow>
