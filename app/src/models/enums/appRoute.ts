@@ -2,6 +2,7 @@ export enum AppRoute {
   Dash = "/",
   Individual = "/individual",
   Conditions = "/conditions",
-  Medications = "/medication",
+  Medication = "/medication",
+  Providers = "/providers",
   DataSettings = "/settings/data",
 }

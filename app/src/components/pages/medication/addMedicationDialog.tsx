@@ -5,7 +5,7 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-import * as MedicationData from "../../../store/reducers/medicationsSlice";
+import * as MedicationData from "../../../store/reducers/medicationSlice";
 import { useAppDispatch } from "../../../store/hooks";
 import { TextField } from "@mui/material";
 import { IMedication } from "../../../models/IMedication";

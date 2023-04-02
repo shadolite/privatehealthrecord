@@ -16,6 +16,6 @@ export const update = async (
   return await database.medication.update(medication.id as number, medication);
 };
 
-export const deleteMedication = async (database: PHRDatabase, id: number) => {
+export const remove = async (database: PHRDatabase, id: number) => {
   return await database.medication.delete(id);
 };

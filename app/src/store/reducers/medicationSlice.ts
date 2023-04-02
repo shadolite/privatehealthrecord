@@ -4,55 +4,55 @@ import { IMedication } from "../../models/IMedication";
 import { dbRequestBegin } from "../../middleware/databaseActions";
 import { AppThunk, RootState } from "../store";
 
-interface MedicationsState {
+interface MedicationState {
   list: Array<IMedication>;
   isLoading: boolean;
 }
 
-const initialState: MedicationsState = {
+const initialState: MedicationState = {
   list: new Array<IMedication>(),
   isLoading: false,
 };
 
-const medicationsSlice = createSlice({
-  name: "medications",
+const medicationSlice = createSlice({
+  name: "medication",
   initialState,
   reducers: {
-    requested: (medications) => {
-      medications.isLoading = true;
+    requested: (medication) => {
+      medication.isLoading = true;
     },
-    received: (medications, action: PayloadAction<Array<IMedication>>) => {
-      medications.isLoading = false;
-      if (action.payload) medications.list = action.payload;
+    received: (medication, action: PayloadAction<Array<IMedication>>) => {
+      medication.isLoading = false;
+      if (action.payload) medication.list = action.payload;
     },
-    failed: (medications) => {
-      medications.isLoading = false;
+    failed: (medication) => {
+      medication.isLoading = false;
     },
-    added: (medications) => {
-      medications.isLoading = false;
+    added: (medication) => {
+      medication.isLoading = false;
     },
-    deleted: (medications) => {
-      medications.isLoading = false;
+    deleted: (medication) => {
+      medication.isLoading = false;
     },
-    updated: (medications) => {
-      medications.isLoading = false;
+    updated: (medication) => {
+      medication.isLoading = false;
     },
   },
 });
 
 // Actions
 const { requested, received, failed, added, updated, deleted } =
-  medicationsSlice.actions;
+  medicationSlice.actions;
 
 // Selectors
-export const getMedications = (state: RootState): Array<IMedication> =>
-  state.medications.list;
+export const getAllMedication = (state: RootState): Array<IMedication> =>
+  state.medication.list;
 
 // Thunks
-export const loadMedications: AppThunk = (dispatch) =>
+export const loadMedication: AppThunk = (dispatch) =>
   dispatch(
     dbRequestBegin({
-      type: RequestType.GetMedications,
+      type: RequestType.GetAllMedication,
       onStart: requested.type,
       onSuccess: received.type,
       onError: failed.type,
@@ -99,4 +99,4 @@ export const deleteMedication =
     );
 
 // Export reducer
-export default medicationsSlice.reducer;
+export default medicationSlice.reducer;

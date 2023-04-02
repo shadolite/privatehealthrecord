@@ -83,7 +83,7 @@ export const addDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.AddDetails,
+        type: RequestType.AddDetail,
         data: details,
         onStart: requested.type,
         onSuccess: added.type,
@@ -96,7 +96,7 @@ export const saveDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.UpdateDetails,
+        type: RequestType.UpdateDetail,
         data: details,
         onStart: requested.type,
         onSuccess: updated.type,
@@ -109,7 +109,7 @@ export const deleteDetails =
   (dispatch) =>
     dispatch(
       dbRequestBegin({
-        type: RequestType.DeleteDetails,
+        type: RequestType.DeleteDetail,
         data: individualId,
         onStart: requested.type,
         onSuccess: deleted.type,

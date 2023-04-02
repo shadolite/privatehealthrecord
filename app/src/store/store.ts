@@ -4,7 +4,8 @@ import { createReduxHistoryContext } from "redux-first-history";
 import dataReducer from "./reducers/dataSlice";
 import individualReducer from "./reducers/individualSlice";
 import conditionsReducer from "./reducers/conditionsSlice";
-import medicationsReducer from "./reducers/medicationsSlice";
+import medicationReducer from "./reducers/medicationSlice";
+import providersReducer from "./reducers/providersSlice";
 import databaseAPI from "../middleware/databaseMiddleware";
 
 const { routerMiddleware, createReduxHistory, routerReducer } =
@@ -16,7 +17,8 @@ const reducer = {
   data: dataReducer,
   individual: individualReducer,
   conditions: conditionsReducer,
-  medications: medicationsReducer,
+  medication: medicationReducer,
+  providers: providersReducer,
   router: routerReducer,
 };
 
