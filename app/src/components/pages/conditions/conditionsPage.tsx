@@ -42,10 +42,10 @@ const ConditionsPage: React.FunctionComponent = (): JSX.Element => {
 
   const handleDoubleClick = (autoFocusColumn: number, row: ICondition) => {
     setConditionName(row.name);
-    setConditionDescription(row.description);
-    setConditionNotes(row.notes);
+    setConditionDescription(row.description ? row.description : "");
+    setConditionNotes(row.notes ? row.notes : "");
     setIsEditing(true);
-    setRowKey(row.id);
+    setRowKey(Number(row.id));
     setColumnKey(autoFocusColumn);
   };
   const resetEditValues = () => {

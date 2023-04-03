@@ -16,6 +16,7 @@ class AppRoutes extends React.Component {
   render() {
     return (
       <Routes>
+        <Route path={AppRoute.Dash} element={<Individual />} />
         <Route path={AppRoute.Individual} element={<Individual />}></Route>
         <Route path={AppRoute.Conditions} element={<Conditions />}></Route>
         <Route path={AppRoute.Medication} element={<Medications />}></Route>

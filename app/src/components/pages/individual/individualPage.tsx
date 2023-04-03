@@ -1,11 +1,8 @@
-import { Button, Skeleton } from "@mui/material";
+import { Button, Skeleton, Toolbar, Tooltip, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import * as React from "react";
-import {
-  loadDetails,
-  deleteDetails,
-} from "../../../store/reducers/individualSlice";
+import { loadDetails } from "../../../store/reducers/individualSlice";
 import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import DetailsItem from "./detailsItem";
 import IndividualConditionsItem from "./individualConditions/individualConditions";
@@ -37,9 +34,20 @@ const IndividualPage: React.FunctionComponent = (): JSX.Element => {
   return (
     <React.Fragment>
       <Box sx={{ width: "100%" }}>
-        <Button variant="outlined" onClick={handleClickOpen}>
-          Edit
-        </Button>
+        <Toolbar>
+          <Typography
+            sx={{ flex: "1 1 100%" }}
+            variant="h6"
+            id="tableTitle"
+            component="div">
+            Individual
+          </Typography>
+          <Tooltip title={`Add/Edit Details`}>
+            <Button variant="outlined" onClick={handleClickOpen}>
+              {individual.details ? "Edit" : "Add"}
+            </Button>
+          </Tooltip>
+        </Toolbar>
         <EditDialog
           open={dialogOpen}
           setOpen={setDialogOpen}
