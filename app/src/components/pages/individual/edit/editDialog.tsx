@@ -90,8 +90,13 @@ const EditDialog: React.FunctionComponent<Props> = ({
 
     if (allStepsCompleted()) {
       saveDetails(details);
+      // setOpen();
     }
     // handleNext();
+  };
+
+  const handleFinish = () => {
+    setOpen(false);
   };
 
   const handleReset = () => {
@@ -146,9 +151,11 @@ const EditDialog: React.FunctionComponent<Props> = ({
                       Step {activeStep + 1} has been saved
                     </Typography>
                   )}
-                  <Button onClick={handleComplete}>
-                    {completedSteps() === totalSteps() - 1 ? "Finish" : "Save"}
-                  </Button>
+                  {completedSteps() === totalSteps() - 1 ? (
+                    <Button onClick={handleComplete}>Save</Button>
+                  ) : (
+                    <Button onClick={handleFinish}>Finish</Button>
+                  )}
                   {/* <Button onClick={handleReset}>Edit</Button> */}
                 </Box>
               </React.Fragment>
