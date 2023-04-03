@@ -40,28 +40,6 @@ const EditDetails: React.FunctionComponent<Props> = ({
   );
   const [notes, setNotes] = React.useState(details.notes ? details.notes : "");
 
-  const handleGivenName = (event: any) => {
-    setGivenName(event.target.value);
-  };
-  const handleFamilyName = (event: any) => {
-    setFamilyName(event.target.value);
-  };
-  const handleBirthdate = (event: any) => {
-    setBirthdate(event.target.value);
-  };
-  const handleBloodType = (event: any) => {
-    setBloodType(event.target.value);
-  };
-  const handleAddress = (event: any) => {
-    setAddress(event.target.value);
-  };
-  const handlePhoneNumber = (event: any) => {
-    setPhoneNumber(event.target.value);
-  };
-  const handleNotes = (event: any) => {
-    setNotes(event.target.value);
-  };
-
   React.useEffect(() => {
     let newDetails = {
       givenName: givenName,
@@ -106,20 +84,20 @@ const EditDetails: React.FunctionComponent<Props> = ({
             label="Given Name"
             required
             value={givenName}
-            onChange={handleGivenName}
+            onChange={(event) => setGivenName(event.target.value)}
           />
           <TextField
             id="familyName"
             label="Family Name"
             value={familyName}
-            onChange={handleFamilyName}
+            onChange={(event) => setFamilyName(event.target.value)}
           />
           <div />
           <TextField
             id="birthdate"
             label="Birthdate"
             value={birthdate}
-            onChange={handleBirthdate}
+            onChange={(event) => setBirthdate(event.target.value)}
           />
           <div />
           <MeasurementFormControl
@@ -133,19 +111,19 @@ const EditDetails: React.FunctionComponent<Props> = ({
             id="bloodType"
             label="Blood Type"
             value={bloodType}
-            onChange={handleBloodType}
+            onChange={(event) => setBloodType(event.target.value)}
           />
           <TextField
             id="address"
             label="Address"
             value={address}
-            onChange={handleAddress}
+            onChange={(event) => setAddress(event.target.value)}
           />
           <TextField
             id="phoneNumber"
             label="Phone Number"
             value={phoneNumber}
-            onChange={handlePhoneNumber}
+            onChange={(event) => setPhoneNumber(event.target.value)}
           />
           <div>
             <TextField
@@ -157,7 +135,7 @@ const EditDetails: React.FunctionComponent<Props> = ({
                 paddingRight: 2,
               }}
               value={notes}
-              onChange={handleNotes}
+              onChange={(event) => setNotes(event.target.value)}
             />
           </div>
         </Item>
