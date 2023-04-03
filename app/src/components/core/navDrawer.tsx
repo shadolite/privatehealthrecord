@@ -15,14 +15,11 @@ import {
   Tooltip,
 } from "@mui/material";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import DisplaySettingsOutlinedIcon from "@mui/icons-material/DisplaySettingsOutlined";
 import StorageOutlinedIcon from "@mui/icons-material/StorageOutlined";
-import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import MonitorHeartIcon from "@mui/icons-material/MonitorHeart";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import MedicationIcon from "@mui/icons-material/Medication";
 import LocalHospitalIcon from "@mui/icons-material/LocalHospital";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 
 const drawerWidth: number = 240;
 const Drawer = styled(MuiDrawer, {
@@ -53,14 +50,17 @@ const Drawer = styled(MuiDrawer, {
 
 interface Props {
   history: any;
+  open: boolean;
+  setOpen: any;
 }
 
-const NavDrawer: React.FunctionComponent<Props> = (
-  props: Props
-): JSX.Element => {
+const NavDrawer: React.FunctionComponent<Props> = ({
+  history,
+  open,
+  setOpen,
+}): JSX.Element => {
   const navigate = useNavigate();
 
-  const [open, setOpen] = React.useState(true);
   const toggleDrawer = () => {
     setOpen(!open);
   };
@@ -111,12 +111,6 @@ const NavDrawer: React.FunctionComponent<Props> = (
           <ListSubheader component="div" inset>
             Settings
           </ListSubheader>
-          {/* <ListItemButton>
-            <ListItemIcon>
-              <DisplaySettingsOutlinedIcon />
-            </ListItemIcon>
-            <ListItemText primary="Display" />
-          </ListItemButton> */}
           <ListItemButton onClick={() => navigate(AppRoute.DataSettings)}>
             <ListItemIcon>
               <StorageOutlinedIcon />
